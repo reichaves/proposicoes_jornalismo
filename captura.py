@@ -102,7 +102,7 @@ def camara(dia_anterior,mes_anterior,ano_anterior,dia_hoje,mes_hoje,ano_hoje):
 		
 		try:
 			r = requests.get(url)
-    		except requests.exceptions.RequestException as e:
+		except requests.exceptions.RequestException as e:
 			print("Requests exception: {}".format(e))
 
     		jsonString = json.dumps(xmltodict.parse(r.text), indent=4)
