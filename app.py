@@ -16,7 +16,7 @@ def telegram():
 	
 	if text in ['oi', 'olá', 'ola']:
 		answer = "Oi, como vai?!"
-  	elif text in ['bom dia', 'boa tarde', 'boa noite']:
+	elif text in ['bom dia', 'boa tarde', 'boa noite']:
 		answer = text
 	elif "jornalismo" in text:
 		answer = "Em breve..."
