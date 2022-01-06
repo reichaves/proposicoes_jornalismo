@@ -14,7 +14,7 @@ def telegram():
 	chat_id = update["message"]["chat"]["id"]
 	text = update["message"]["text"].lower()
 	
-  	if text in ['oi', 'olá', 'ola']:
+	if text in ['oi', 'olá', 'ola']:
 		answer = "Oi, como vai?!"
   	elif text in ['bom dia', 'boa tarde', 'boa noite']:
 		answer = text
