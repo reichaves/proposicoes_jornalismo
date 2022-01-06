@@ -64,7 +64,7 @@ def camara(dia_anterior,mes_anterior,ano_anterior,dia_hoje,mes_hoje,ano_hoje):
 	# Faz a iteração a partir do número de páginas encontrado
 	for pagina in range(1, ultima):
 		parametros = {'formato': 'json', 'itens': 100, 'pagina': pagina}
-  		resposta = requests.get(url, parametros)
+		resposta = requests.get(url, parametros)
 
 	        # Captura os dados          
 		for vez in resposta.json()['dados']:
