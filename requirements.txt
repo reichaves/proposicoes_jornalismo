@@ -2,4 +2,4 @@ flask
 gunicorn
 requests
 xmltodict
-smtplib
+secure-smtplib
