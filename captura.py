@@ -99,8 +99,8 @@ def camara(dia_anterior,mes_anterior,ano_anterior,dia_hoje,mes_hoje,ano_hoje):
 		
 		url = endpoint + id
     		#print(url)
-
-    		try:
+		
+		try:
 			r = requests.get(url)
     		except requests.exceptions.RequestException as e:
 			print("Requests exception: {}".format(e))
