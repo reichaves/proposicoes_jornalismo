@@ -475,121 +475,121 @@ def senado(ano_anterior, mes_anterior, dia_anterior):
 			CodigoLocal = None
 
 		try:
-		      TipoLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['TipoLocal'])
-		    except KeyError:
-		      TipoLocal = None                
-		    except TypeError:
-		      TipoLocal = None
+			TipoLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['TipoLocal'])
+		except KeyError:
+			TipoLocal = None                
+		except TypeError:
+			TipoLocal = None
 
-		    try:
-		      SiglaCasaLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['SiglaCasaLocal'])
-		    except KeyError:
-		      SiglaCasaLocal = None                
-		    except TypeError:
-		      SiglaCasaLocal = None
+		try:
+			SiglaCasaLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['SiglaCasaLocal'])
+		except KeyError:
+			SiglaCasaLocal = None                
+		except TypeError:
+			SiglaCasaLocal = None
 
-		    try:
-		      NomeCasaLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['NomeCasaLocal'])
-		    except KeyError:
-		      NomeCasaLocal = None                
-		    except TypeError:
-		      NomeCasaLocal = None
+		try:
+			NomeCasaLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['NomeCasaLocal'])
+		except KeyError:
+			NomeCasaLocal = None                
+		except TypeError:
+			NomeCasaLocal = None
 
-		    try:
-		      SiglaLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['SiglaLocal'])
-		    except KeyError:
-		      SiglaLocal = None                
-		    except TypeError:
-		      SiglaLocal = None
+		try:
+			SiglaLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['SiglaLocal'])
+		except KeyError:
+			SiglaLocal = None                
+		except TypeError:
+			SiglaLocal = None
 
-		    try:
-		      NomeLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['NomeLocal'])
-		    except KeyError:
-		      NomeLocal = None                
-		    except TypeError:
-		      NomeLocal = None
+		try:
+			NomeLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['NomeLocal'])
+		except KeyError:
+			NomeLocal = None                
+		except TypeError:
+			NomeLocal = None
 
-		    try:
-		      url_emendas = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][0]['UrlServico'])
-		    except KeyError:
-		      url_emendas = None                
-		    except TypeError:
-		      url_emendas = None
+		try:
+			url_emendas = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][0]['UrlServico'])
+		except KeyError:
+			url_emendas = None                
+		except TypeError:
+			url_emendas = None
 
-		    try:
-		      url_movimentacoes = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][1]['UrlServico'])
-		    except KeyError:
-		      url_movimentacoes = None                
-		    except TypeError:
-		      url_movimentacoes = None
+		try:
+			url_movimentacoes = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][1]['UrlServico'])
+		except KeyError:
+			url_movimentacoes = None                
+		except TypeError:
+			url_movimentacoes = None
 
-		    try:
-		      url_relatorias = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][2]['UrlServico'])
-		    except KeyError:
-		      url_relatorias = None                
-		    except TypeError:
-		      url_relatorias = None
+		try:
+			url_relatorias = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][2]['UrlServico'])
+		except KeyError:
+			url_relatorias = None                
+		except TypeError:
+			url_relatorias = None
 
-		    try:
-		      url_texto = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][3]['UrlServico'])
-		    except KeyError:
-		      url_texto = None                
-		    except TypeError:
-		      url_texto = None
+		try:
+			url_texto = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][3]['UrlServico'])
+		except KeyError:
+			url_texto = None                
+		except TypeError:
+			url_texto = None
 
-		    try:
-		      url_votacoes_materia = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][4]['UrlServico'])
-		    except KeyError:
-		      url_votacoes_materia = None                
-		    except TypeError:
-		      url_votacoes_materia = None
+		try:
+			url_votacoes_materia = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][4]['UrlServico'])
+		except KeyError:
+			url_votacoes_materia = None                
+		except TypeError:
+			url_votacoes_materia = None
 
-		    try:
-		      url_votacoes_comissoes = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][5]['UrlServico'])
-		    except KeyError:
-		      url_votacoes_comissoes = None                
-		    except TypeError:
-		      url_votacoes_comissoes = None
+		try:
+			url_votacoes_comissoes = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][5]['UrlServico'])
+		except KeyError:
+			url_votacoes_comissoes = None                
+		except TypeError:
+			url_votacoes_comissoes = None
 
-    dicionario['NomeAutor'] = NomeAutor
-    dicionario['SiglaTipoAutor'] = SiglaTipoAutor
-    dicionario['DescricaoTipoAutor'] = DescricaoTipoAutor
-    dicionario['UfAutor'] = UfAutor
-    dicionario['NumOrdemAutor'] = NumOrdemAutor
-    dicionario['IndicadorOutrosAutores'] = IndicadorOutrosAutores
-    dicionario['CodigoParlamentar'] = CodigoParlamentar
-    dicionario['CodigoPublicoNaLegAtual'] = CodigoPublicoNaLegAtual
-    dicionario['NomeParlamentar'] = NomeParlamentar
-    dicionario['NomeCompletoParlamentar'] = NomeCompletoParlamentar
-    dicionario['SexoParlamentar'] = SexoParlamentar
-    dicionario['FormaTratamento'] = FormaTratamento
-    dicionario['UrlFotoParlamentar'] = UrlFotoParlamentar
-    dicionario['UrlPaginaParlamentar'] = UrlPaginaParlamentar
-    dicionario['EmailParlamentar'] = EmailParlamentar
-    dicionario['SiglaPartidoParlamentar'] = SiglaPartidoParlamentar
-    dicionario['UfParlamentar'] = UfParlamentar
-    dicionario['NumeroAutuacao'] = NumeroAutuacao
-    dicionario['DataSituacao'] = DataSituacao
-    dicionario['CodigoSituacao'] = CodigoSituacao
-    dicionario['SiglaSituacao'] = SiglaSituacao
-    dicionario['DescricaoSituacao'] = DescricaoSituacao
-    dicionario['DataLocal'] = DataLocal
-    dicionario['CodigoLocal'] = CodigoLocal
-    dicionario['TipoLocal'] = TipoLocal
-    dicionario['SiglaCasaLocal'] = SiglaCasaLocal
-    dicionario['NomeCasaLocal'] = NomeCasaLocal
-    dicionario['SiglaLocal'] = SiglaLocal
-    dicionario['NomeLocal'] = NomeLocal
-    dicionario['url_emendas'] = url_emendas
-    dicionario['url_movimentacoes'] = url_movimentacoes
-    dicionario['url_relatorias'] = url_relatorias
-    dicionario['url_texto'] = url_texto
-    dicionario['url_votacoes_materia'] = url_votacoes_materia
-    dicionario['url_votacoes_comissoes'] = url_votacoes_comissoes
+    		dicionario['NomeAutor'] = NomeAutor
+    		dicionario['SiglaTipoAutor'] = SiglaTipoAutor
+	    	dicionario['DescricaoTipoAutor'] = DescricaoTipoAutor
+	    	dicionario['UfAutor'] = UfAutor
+	    	dicionario['NumOrdemAutor'] = NumOrdemAutor
+	    	dicionario['IndicadorOutrosAutores'] = IndicadorOutrosAutores
+	    	dicionario['CodigoParlamentar'] = CodigoParlamentar
+	    	dicionario['CodigoPublicoNaLegAtual'] = CodigoPublicoNaLegAtual
+	    	dicionario['NomeParlamentar'] = NomeParlamentar
+	    	dicionario['NomeCompletoParlamentar'] = NomeCompletoParlamentar
+	    	dicionario['SexoParlamentar'] = SexoParlamentar
+	    	dicionario['FormaTratamento'] = FormaTratamento
+	    	dicionario['UrlFotoParlamentar'] = UrlFotoParlamentar
+	    	dicionario['UrlPaginaParlamentar'] = UrlPaginaParlamentar
+	    	dicionario['EmailParlamentar'] = EmailParlamentar
+	    	dicionario['SiglaPartidoParlamentar'] = SiglaPartidoParlamentar
+	    	dicionario['UfParlamentar'] = UfParlamentar
+	    	dicionario['NumeroAutuacao'] = NumeroAutuacao
+	    	dicionario['DataSituacao'] = DataSituacao
+	    	dicionario['CodigoSituacao'] = CodigoSituacao
+	    	dicionario['SiglaSituacao'] = SiglaSituacao
+	    	dicionario['DescricaoSituacao'] = DescricaoSituacao
+	    	dicionario['DataLocal'] = DataLocal
+	    	dicionario['CodigoLocal'] = CodigoLocal
+	    	dicionario['TipoLocal'] = TipoLocal
+	    	dicionario['SiglaCasaLocal'] = SiglaCasaLocal
+	    	dicionario['NomeCasaLocal'] = NomeCasaLocal
+	    	dicionario['SiglaLocal'] = SiglaLocal
+	    	dicionario['NomeLocal'] = NomeLocal
+	    	dicionario['url_emendas'] = url_emendas
+	    	dicionario['url_movimentacoes'] = url_movimentacoes
+	    	dicionario['url_relatorias'] = url_relatorias
+	    	dicionario['url_texto'] = url_texto
+	    	dicionario['url_votacoes_materia'] = url_votacoes_materia
+	    	dicionario['url_votacoes_comissoes'] = url_votacoes_comissoes
 
 
-    projetos_det.append(dicionario)
-
+    		projetos_det.append(dicionario)
+	
 	df_propdia_det = pd.DataFrame(projetos_det)
 	df_propdia_det = df_propdia_det[pd.notnull(df_propdia_det['EmentaMateria'])].copy()
 	#df_propdia_det.info()
@@ -601,46 +601,46 @@ def senado(ano_anterior, mes_anterior, dia_anterior):
 	prop_teor = []
 
 	for num, row in df_propdia_det.iterrows():
-    codigo = row['CodigoMateria']
+		codigo = row['CodigoMateria']
 
 		url = prefixo + codigo
-    #print(url)
-    
-    try:
-      r = requests.get(url, headers=headers)
-    except requests.exceptions.HTTPError as errh:
-    	print ("Http Error:",errh)
-    except requests.exceptions.ConnectionError as errc:
-    	print ("Error Connecting:",errc) 
-    except requests.exceptions.Timeout as errt:
-    	print ("Timeout Error:",errt)
-    except requests.exceptions.RequestException as err:
-    	print ("OOps: Something Else",err)
+    		#print(url)
+		
+		try:
+			r = requests.get(url, headers=headers)
+    		except requests.exceptions.HTTPError as errh:
+			print ("Http Error:",errh)
+    		except requests.exceptions.ConnectionError as errc:
+			print ("Error Connecting:",errc) 
+    		except requests.exceptions.Timeout as errt:
+			print ("Timeout Error:",errt)
+    		except requests.exceptions.RequestException as err:
+			print ("OOps: Something Else",err)
 
-    projects = r.json()
+    		projects = r.json()
     
-    dicionario = {
+    		dicionario = {
         		"CodigoMateria": get_by_key('TextoMateria.Materia.IdentificacaoMateria.CodigoMateria', projects)}
 
-	  try:
-      CodigoTexto = str(projects['TextoMateria']['Materia']['Textos']['Texto'][0]['CodigoTexto'])
-    except KeyError:
-    	CodigoTexto = None                
-    except TypeError:
-      CodigoTexto = None
+	  	try:
+			CodigoTexto = str(projects['TextoMateria']['Materia']['Textos']['Texto'][0]['CodigoTexto'])
+    		except KeyError:
+			CodigoTexto = None                
+    		except TypeError:
+			CodigoTexto = None
 
-    try:
-      UrlTexto = str(projects['TextoMateria']['Materia']['Textos']['Texto'][0]['UrlTexto'])
-    except KeyError:
-      UrlTexto = None                
-    except TypeError:
-      UrlTexto = None
+    		try:
+			UrlTexto = str(projects['TextoMateria']['Materia']['Textos']['Texto'][0]['UrlTexto'])
+    		except KeyError:
+      			UrlTexto = None                
+    		except TypeError:
+      			UrlTexto = None
 
-    dicionario['CodigoTexto'] = CodigoTexto
-    dicionario['UrlTexto'] = UrlTexto
+    		dicionario['CodigoTexto'] = CodigoTexto
+		dicionario['UrlTexto'] = UrlTexto
 
-    prop_teor.append(dicionario)
-
+    		prop_teor.append(dicionario)d
+	
 	df_prop_teor = pd.DataFrame(prop_teor)
 	#df_prop_teor.info()
 
@@ -679,13 +679,12 @@ def jornal(dados, origem):
 
 ### CRIA FRASES
 def frases(dados, origem):
-  lista_sentencas = []
-  #dados.info()
+	lista_sentencas = []
+	#dados.info()
 	conta = 1
 	for num, row in dados.iterrows():
-
 		if origem == 'senado':
-    			proposicao_ementa = row['ementa_minuscula']
+			proposicao_ementa = row['ementa_minuscula']
     			proposicao_tipo = row['SiglaSubtipoMateria']
     			proposicao_numero = row['NumeroMateria']
     			proposicao_ano = row['AnoMateria']
@@ -694,9 +693,9 @@ def frases(dados, origem):
     			endereco = row['UrlTexto']
     			nome = row['NomeAutor']
     			casa = 'SENADO'
-          pagina = "https://www25.senado.leg.br/web/atividade/materias/-/materia/" + str(row['CodigoMateria'])
-    elif origem == 'camara':
-    			proposicao_ementa = row['ementa_minuscula']
+			pagina = "https://www25.senado.leg.br/web/atividade/materias/-/materia/" + str(row['CodigoMateria'])
+    		elif origem == 'camara':
+			proposicao_ementa = row['ementa_minuscula']
     			proposicao_tipo = row['siglaTipo']
     			proposicao_numero = row['numero']
     			proposicao_ano = row['ano']
@@ -707,55 +706,56 @@ def frases(dados, origem):
     			nome = nome.replace("]", "")
     			nome = nome.replace("'", "")
     			casa = 'CÂMARA'
-          pagina = "https://www.camara.leg.br/propostas-legislativas/" + str(row['id'])
+          		pagina = "https://www.camara.leg.br/propostas-legislativas/" + str(row['id'])
 
-    sentencas = {}
+    		sentencas = {}
 
-    if 'jornalismo' in proposicao_ementa:
-      sentencas['texto3/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre jornalismo e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
-    elif 'jornalista' in proposicao_ementa or 'jornalistas' in proposicao_ementa:
-      sentencas['texto4/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre jornalistas e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
-    elif 'comunicadores' in proposicao_ementa:
-      sentencas['texto5/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre ccomunicadores e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
-    elif 'imprensa' in proposicao_ementa:
-      sentencas['texto6/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre imprensa e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
-    elif 'desinformação' in proposicao_ementa:
-      sentencas['texto11/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre desinformação e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
-    elif 'notícias falsas' in proposicao_ementa or 'fake news' in proposicao_ementa:
-      sentencas['texto7/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre fake news ou notícias falsas e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
-    elif 'verificadores de fatos' in proposicao_ementa or 'checagem de fatos' in proposicao_ementa:
-      sentencas['texto8/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre verificadores de fatos ou checagem de fatos e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
-    elif 'transparência na internet' in proposicao_ementa:
-      sentencas['texto9/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre transparência na internet e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
-    elif 'radiodifusão' in proposicao_ementa:
-      sentencas['texto10/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre radiodifusão e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
-    elif 'liberdade de expressão' in proposicao_ementa:
-      sentencas['texto12/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre liberdade de expressão e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
-    elif 'informações de interesse coletivo' in proposicao_ementa:
-      sentencas['texto13/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre informações de interesse coletivo e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
+    		if 'jornalismo' in proposicao_ementa:
+			sentencas['texto3/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre jornalismo e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
+    		elif 'jornalista' in proposicao_ementa or 'jornalistas' in proposicao_ementa:
+      			sentencas['texto4/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre jornalistas e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
+    		elif 'comunicadores' in proposicao_ementa:
+			sentencas['texto5/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre ccomunicadores e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
+    		elif 'imprensa' in proposicao_ementa:
+      			sentencas['texto6/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre imprensa e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
+    		elif 'desinformação' in proposicao_ementa:
+      			sentencas['texto11/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre desinformação e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
+    		elif 'notícias falsas' in proposicao_ementa or 'fake news' in proposicao_ementa:
+      			sentencas['texto7/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre fake news ou notícias falsas e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
+    		elif 'verificadores de fatos' in proposicao_ementa or 'checagem de fatos' in proposicao_ementa:
+      			sentencas['texto8/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre verificadores de fatos ou checagem de fatos e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
+    		elif 'transparência na internet' in proposicao_ementa:
+      			sentencas['texto9/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre transparência na internet e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
+    		elif 'radiodifusão' in proposicao_ementa:
+      			sentencas['texto10/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre radiodifusão e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
+    		elif 'liberdade de expressão' in proposicao_ementa:
+      			sentencas['texto12/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre liberdade de expressão e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
+    		elif 'informações de interesse coletivo' in proposicao_ementa:
+      			sentencas['texto13/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre informações de interesse coletivo e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 
     
-    #print(sentencas)
-    # Testa se dicionario veio vazio
-    res = not bool(sentencas)  
-    if res == False:
-      lista_sentencas.append(sentencas)
+    		#print(sentencas)
+    		# Testa se dicionario veio vazio
+    		res = not bool(sentencas)  
+    		if res == False:
+			lista_sentencas.append(sentencas)
 
-    	#print(lista_sentencas)
-    conta = conta + 1 
+    		#print(lista_sentencas)
+    		conta = conta + 1 
 
-    #print(lista_sentencas)
+    		#print(lista_sentencas)
+	
 	df_lista_sentencas = pd.DataFrame(lista_sentencas)
 	#df_lista_sentencas.info()
 	#df_lista_sentencas.to_csv('teste_sen2.csv',index=False)
     	#df_lista_sentencas.info()
     	#print(df_lista_sentencas)
 
-  with open('resultados/tweets.json', 'w') as outfile:
-    json.dump(lista_sentencas, outfile)
+  	#with open('resultados/tweets.json', 'w') as outfile:
+	#	json.dump(lista_sentencas, outfile)
 
 
-  return df_lista_sentencas
+  	return df_lista_sentencas
 
 
 
@@ -763,44 +763,44 @@ def frases(dados, origem):
 
 ### MANDA E-MAIL
 def mandamail(dados):
-  now = datetime.now()
-  dia_hoje = now.strftime("%d")
-  mes_hoje = now.strftime("%m")
-  ano_hoje = now.strftime("%Y")
+	now = datetime.now()
+  	dia_hoje = now.strftime("%d")
+  	mes_hoje = now.strftime("%m")
+  	ano_hoje = now.strftime("%Y")
 
-  recipients = ['reinaldo@abraji.org.br']
-  msg = MIMEMultipart()
-  msg['From'] = "Robot jornalista"  # sender name
-  msg['To'] = ", ".join(recipients) # for one recipient just enter a valid email address
-  msg['Subject'] = str(dia_hoje) + "/" + str(mes_hoje) + "/" + str(ano_hoje) + " Tramitacoes de interesse do jornalismo no Congresso"
+  	recipients = ['reinaldo@abraji.org.br']
+  	msg = MIMEMultipart()
+  	msg['From'] = "Robot jornalista"  # sender name
+  	msg['To'] = ", ".join(recipients) # for one recipient just enter a valid email address
+  	msg['Subject'] = str(dia_hoje) + "/" + str(mes_hoje) + "/" + str(ano_hoje) + " Tramitacoes de interesse do jornalismo no Congresso"
 	
-  # Isola apenas primeiras linhas
+  	# Isola apenas primeiras linhas
 	df = dados.bfill().iloc[[0]]
 	columns = list(df) 
 
 	# Itera nas colunas de cada frase
-  lista = []
+  	lista = []
 	for i in columns:
 		texto = df[i][0]
-    if texto != None:
-      lista.append(texto)
-  #print(lista)
+    		if texto != None:
+			lista.append(texto)
+  	#print(lista)
 
-  body = "Olá seres humanos!\n\nEu sou um robô que vasculha as APIs da Câmara e do Senado em busca de proposições de interesse dos jornalistas.\n\nVeja as que tiveram alguma tramitação entre hoje e anteontem (todo dia eu vasculho esse intervalo):\n\n" + '\n'.join(lista)+ "\n\nNo momento eu procuro estas palavras-chave JORNALISMO, JORNALISTA, JORNALISTAS, COMUNICADORES, IMPRENSA, VERIFICADORES DE FATOS, CHECAGEM DE FATOS, FAKE NEWS, DESINFORMAÇÃO, TRANSPARÊNCIA NA INTERNET. Posso procurar quantas quiserem.\n\nPara mais detalhes consulte meu mestre: reinaldo@abraji.org.br"
+  	body = "Olá seres humanos!\n\nEu sou um robô que vasculha as APIs da Câmara e do Senado em busca de proposições de interesse dos jornalistas.\n\nVeja as que tiveram alguma tramitação entre hoje e anteontem (todo dia eu vasculho esse intervalo):\n\n" + '\n'.join(lista)+ "\n\nNo momento eu procuro estas palavras-chave JORNALISMO, JORNALISTA, JORNALISTAS, COMUNICADORES, IMPRENSA, VERIFICADORES DE FATOS, CHECAGEM DE FATOS, FAKE NEWS, DESINFORMAÇÃO, TRANSPARÊNCIA NA INTERNET. Posso procurar quantas quiserem.\n\nPara mais detalhes consulte meu mestre: reinaldo@abraji.org.br"
 
-  msg.attach(MIMEText(body, 'plain'))
-  server = smtplib.SMTP('smtp.gmail.com', 587)  # put your relevant SMTP here
-
-
-  server.ehlo()
-  server.starttls()
-  server.ehlo()
-  server.login('robojornalista@gmail.com', '5ZAD9U8ftEfiT9X')   # use your real gmail account user name and password
-  server.send_message(msg)
-  server.quit()
+  	msg.attach(MIMEText(body, 'plain'))
+  	server = smtplib.SMTP('smtp.gmail.com', 587)  # put your relevant SMTP here
 
 
-  return
+  	server.ehlo()
+  	server.starttls()
+  	server.ehlo()
+  	server.login('robojornalista@gmail.com', '5ZAD9U8ftEfiT9X')   # use your real gmail account user name and password
+  	server.send_message(msg)
+  	server.quit()
+
+
+  	return
 
 
 
@@ -808,7 +808,6 @@ def mandamail(dados):
 
 ### DEFINIR BLOCO DE EXECUÇÃO PRINCIPAL
 def main():
-
 	# Captura o dia, mês e ano de ontem
 	dia_anterior = (datetime.now() - timedelta(1)).strftime('%d')
 	mes_anterior = (datetime.now() - timedelta(1)).strftime('%m')
@@ -823,43 +822,43 @@ def main():
 	#Captura proposicoes Camara
 	prop_cam = camara(dia_anterior,mes_anterior,ano_anterior,dia_hoje,mes_hoje,ano_hoje)
 	tamanho = len(prop_cam.index)
-  print("Quantidade de proposicoes de interesse na Camara: ", tamanho)
-  prop_cam.info()
+  	print("Quantidade de proposicoes de interesse na Camara: ", tamanho)
+  	prop_cam.info()
 
-  # Cria frases da Camara
-  if tamanho != 0:
-    nome = "resultados/" + dia_anterior + "_" + mes_anterior + "_" + ano_anterior + "_" + "proposicoes_camara_jornalismo"
-    prop_cam.to_csv(f'{nome}.csv',index=False)
+  	# Cria frases da Camara
+  	if tamanho != 0:
+		nome = "resultados/" + dia_anterior + "_" + mes_anterior + "_" + ano_anterior + "_" + "proposicoes_camara_jornalismo"
+    		#prop_cam.to_csv(f'{nome}.csv',index=False)
 
-    df_lista_sentencas = frases(prop_cam, 'camara')
-   	#print(df_lista_sentencas)
-    #a = input("-----------------")
+    		df_lista_sentencas = frases(prop_cam, 'camara')
+   		#print(df_lista_sentencas)
+    		#a = input("-----------------")
 
-   	# Manda e-mail
-   	tam_frases = len(df_lista_sentencas.index)
-   	if tam_frases > 0:
-      mandamail(df_lista_sentencas)
+   		# Manda e-mail
+   		tam_frases = len(df_lista_sentencas.index)
+   		if tam_frases > 0:
+      			mandamail(df_lista_sentencas)
 
-  print("/////////////////////////////////////")  	
+  	print("/////////////////////////////////////")  	
 
-  # Captura proposicoes Senado
+  	# Captura proposicoes Senado
 	prop_sen = senado(ano_anterior, mes_anterior, dia_anterior)
 	tamanho = len(prop_sen.index)
-  print("Quantidade de proposicoes de interesse no Senado: ", tamanho)
-  #prop_sen.info()
+  	print("Quantidade de proposicoes de interesse no Senado: ", tamanho)
+  	#prop_sen.info()
 	
 	# Cria frases do Senado
-  if tamanho != 0:
-    nome = "resultados/" + dia_anterior + "_" + mes_anterior + "_" + ano_anterior + "_" + "proposicoes_senado_jornalismo"
-    prop_sen.to_csv(f'{nome}.csv',index=False)
+  	if tamanho != 0:
+		nome = "resultados/" + dia_anterior + "_" + mes_anterior + "_" + ano_anterior + "_" + "proposicoes_senado_jornalismo"
+    		#prop_sen.to_csv(f'{nome}.csv',index=False)
 
-    df_lista_sentencas = frases(prop_sen, 'senado')
-   	#print(df_lista_sentencas)
+    		df_lista_sentencas = frases(prop_sen, 'senado')
+   		#print(df_lista_sentencas)
 
-   	# Manda e-mail
-   	tam_frases = len(df_lista_sentencas.index)
-   	if tam_frases > 0:
-      mandamail(df_lista_sentencas)
+   		# Manda e-mail
+   		tam_frases = len(df_lista_sentencas.index)
+   		if tam_frases > 0:
+			mandamail(df_lista_sentencas)
 
 
 
