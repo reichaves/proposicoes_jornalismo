@@ -96,8 +96,8 @@ def camara(dia_anterior,mes_anterior,ano_anterior,dia_hoje,mes_hoje,ano_hoje):
 
 	for num, row in df_proposicoes_api_final.iterrows():
 		id = row['id']
-
-    		url = endpoint + id
+		
+		url = endpoint + id
     		#print(url)
 
     		try:
