@@ -24,9 +24,9 @@ from email.mime.text import MIMEText
 
 ### FUNÇÃO DA CÂMARA DOS DEPUTADOS
 def camara(dia_anterior,mes_anterior,ano_anterior,dia_hoje,mes_hoje,ano_hoje):
-  # Forma url de pesquisa
+	# Forma url de pesquisa
 	url = "https://dadosabertos.camara.leg.br/api/v2/proposicoes?dataInicio=%s-%s-%s&dataFim=%s-%s-%s&ordem=ASC&ordenarPor=id" % (ano_anterior, mes_anterior, dia_anterior, ano_hoje, mes_hoje, dia_hoje)
-	print(url)
+	#print(url)
 
 	# Captura quantas páginas tem esse intervalo de data na API
 	parametros = {'formato': 'json', 'itens': 100}
@@ -63,12 +63,12 @@ def camara(dia_anterior,mes_anterior,ano_anterior,dia_hoje,mes_hoje,ano_hoje):
 
 	# Faz a iteração a partir do número de páginas encontrado
 	for pagina in range(1, ultima):
-  		parametros = {'formato': 'json', 'itens': 100, 'pagina': pagina}
+		parametros = {'formato': 'json', 'itens': 100, 'pagina': pagina}
   		resposta = requests.get(url, parametros)
 
-	    # Captura os dados          
-	    for vez in resposta.json()['dados']:
-        dicionario = {"id": str(vez['id']).strip(), 
+	        # Captura os dados          
+		for vez in resposta.json()['dados']:
+			dicionario = {"id": str(vez['id']).strip(), 
                           "uri": str(vez['uri']).strip(), 
                           "siglaTipo": str(vez['siglaTipo']).strip(), 
                           "codTipo": str(vez['codTipo']).strip(), 
@@ -76,7 +76,7 @@ def camara(dia_anterior,mes_anterior,ano_anterior,dia_hoje,mes_hoje,ano_hoje):
                           "ano": str(vez['ano']).strip(), 
                           "ementa": str(vez['ementa']).strip()
                           }
-  		  proposicoes.append(dicionario)
+			proposicoes.append(dicionario)
 
 	df_proposicoes_api = pd.DataFrame(proposicoes)
 	#df_proposicoes_api.info()
@@ -95,39 +95,39 @@ def camara(dia_anterior,mes_anterior,ano_anterior,dia_hoje,mes_hoje,ano_hoje):
 	conta = 0
 
 	for num, row in df_proposicoes_api_final.iterrows():
-    id = row['id']
+		id = row['id']
 
-    url = endpoint + id
-    #print(url)
+    		url = endpoint + id
+    		#print(url)
 
-    try:
-      r = requests.get(url)
-    except requests.exceptions.RequestException as e:
-    	print("Requests exception: {}".format(e))
+    		try:
+			r = requests.get(url)
+    		except requests.exceptions.RequestException as e:
+			print("Requests exception: {}".format(e))
 
-    jsonString = json.dumps(xmltodict.parse(r.text), indent=4)
+    		jsonString = json.dumps(xmltodict.parse(r.text), indent=4)
 
-    d = json.loads(jsonString)
+    		d = json.loads(jsonString)
 
-    lista = [d['autores']]
+    		lista = [d['autores']]
 
-    df_lista = pd.DataFrame(lista)
-    df_lista["id"] = id
-    
-    if conta == 0:
-      df_autores = df_lista.copy()
-    else:
-    	df_autores = df_autores.append(df_lista)
+    		df_lista = pd.DataFrame(lista)
+    		df_lista["id"] = id
+		
+		if conta == 0:
+			df_autores = df_lista.copy()
+		else:
+			df_autores = df_autores.append(df_lista)
 
-    conta = conta + 1
+    		conta = conta + 1
+	
 	#df_autores.info()
-
 	seleciona = jornal(df_proposicoes_api_final, 'camara')
 
-  # Testa se há frases no dia 
-  tamanho = len(seleciona)
-  if tamanho == 0:
-    return seleciona
+  	# Testa se há frases no dia 
+  	tamanho = len(seleciona)
+  	if tamanho == 0:
+		return seleciona
 
 	# Busca a última situação das proposicoes
 	endpoint = "https://dadosabertos.camara.leg.br/api/v2/proposicoes/"
@@ -136,21 +136,21 @@ def camara(dia_anterior,mes_anterior,ano_anterior,dia_hoje,mes_hoje,ano_hoje):
 	parametros = {'formato': 'json'}
 
 	for num, row in seleciona.iterrows():
-    id = row['id']
+		id = row['id']
 
-  	url = endpoint + id
-  	#print(url)
+  		url = endpoint + id
+  		#print(url)
 
-  	# captura os dados de detalhes
-  	try:
-      r = requests.get(url, parametros)
-  	except requests.exceptions.RequestException as e:
-    	print("Requests exception: {}".format(e))
+  		# captura os dados de detalhes
+		try:
+			r = requests.get(url, parametros)
+		except requests.exceptions.RequestException as e:
+			print("Requests exception: {}".format(e))
 
-  	vez =  r.json()['dados']
+  		vez =  r.json()['dados']
     
-  	dicionario = {"id": str(vez['id']).strip(), 
-        	          "uri": str(vez['uri']).strip(), 
+  		dicionario = {"id": str(vez['id']).strip(), 
+			      "uri": str(vez['uri']).strip(), 
                           "siglaTipo": str(vez['siglaTipo']).strip(), 
                           "codTipo": str(vez['codTipo']).strip(), 
                           "numero": str(vez['numero']).strip(), 
@@ -167,10 +167,10 @@ def camara(dia_anterior,mes_anterior,ano_anterior,dia_hoje,mes_hoje,ano_hoje):
                           "urlInteiroTeor": str(vez['urlInteiroTeor']).strip(),
                           "uriAutores": str(vez['uriAutores']).strip()
                           }
-
-  	projetos.append(dicionario)
-    
+	  	projetos.append(dicionario)
+	
 	df_proposicoes_situacao = pd.DataFrame(projetos)
+	
 	# Inclui autores
 	df_proposicoes_situacao_autor = pd.merge(df_proposicoes_situacao.drop_duplicates('id'), df_autores, left_on='id', right_on='id')
 	#df_projetos_situacao.info()
@@ -188,19 +188,19 @@ def camara(dia_anterior,mes_anterior,ano_anterior,dia_hoje,mes_hoje,ano_hoje):
 ### FUNÇÃO DO SENADO
 # função para ler todas chaves nas APIs do senado
 def get_by_key(key, value):
-    try:
-        if '.' in key:
-            old_key, new_key = key.split('.', 1)
-            new_value = value[old_key]
-            return get_by_key(new_key, new_value)
-        else:
-            return value[key]
-    except (KeyError, TypeError) as _:
-        return None
+	try:
+		if '.' in key:
+			old_key, new_key = key.split('.', 1)
+			new_value = value[old_key]
+			return get_by_key(new_key, new_value)
+		else:
+			return value[key]
+	except (KeyError, TypeError) as _:
+		return None
 
 
 def senado(ano_anterior, mes_anterior, dia_anterior):
-  # Define header padrão
+	# Define header padrão
 	headers = {"Accept" : "application/json"}
 
 	# Forma url de pesquisa principal
@@ -210,26 +210,26 @@ def senado(ano_anterior, mes_anterior, dia_anterior):
 	tramitando = []
 
 	try:
-    r = requests.get(url, headers=headers)
-    tramit = r.json()
+		r = requests.get(url, headers=headers)
+		tramit = r.json()
 	except requests.exceptions.RequestException as e:
-    print("Requests exception: {}".format(e))
-
-  # Testa se a url tem alguma proposicao
-  try:
-    teste = str(tramit["ListaMateriasTramitando"]["Materias"]["Materia"])
-  except KeyError:
-   	column_names = ["a"]
+		print("Requests exception: {}".format(e))
+	
+	# Testa se a url tem alguma proposicao
+	try:
+		teste = str(tramit["ListaMateriasTramitando"]["Materias"]["Materia"])
+	except KeyError:
+		column_names = ["a"]
 		df = pd.DataFrame(columns = column_names)
 		return df
-  except TypeError:
-    column_names = ["a"]
+	except TypeError:
+		column_names = ["a"]
 		df = pd.DataFrame(columns = column_names)
 		return df
-
-  # Captura dados de proposicoes tramitando
+	
+	# Captura dados de proposicoes tramitando
 	for item in tramit["ListaMateriasTramitando"]["Materias"]["Materia"]:
-    dicionario = {
+		dicionario = {
         		"CodigoMateria": get_by_key('IdentificacaoMateria.CodigoMateria', item),
         		"SiglaCasaIdentificacaoMateria": get_by_key('IdentificacaoMateria.SiglaCasaIdentificacaoMateria', item),
         		"NomeCasaIdentificacaoMateria": get_by_key('IdentificacaoMateria.NomeCasaIdentificacaoMateria', item),
@@ -241,9 +241,8 @@ def senado(ano_anterior, mes_anterior, dia_anterior):
         		"IndicadorTramitando": get_by_key('IdentificacaoMateria.IndicadorTramitando', item),
         		"DataUltimaAtualizacao": get_by_key('DataUltimaAtualizacao', item)
         		}
-
-    tramitando.append(dicionario)
-
+		tramitando.append(dicionario)
+	
 	df_tramitando = pd.DataFrame(tramitando)
 	#df_tramitando.info()
 
@@ -256,25 +255,25 @@ def senado(ano_anterior, mes_anterior, dia_anterior):
 	projetos_det = []
 
 	for num, row in df_tramitando.iterrows():
-    codigo = row['CodigoMateria']
-
-   	url = prefixo + codigo
+		codigo = row['CodigoMateria']
+		
+		url = prefixo + codigo
     		#print(url)
-    
-    try:
-      r = requests.get(url, headers=headers)
-    except requests.exceptions.HTTPError as errh:
-      print ("Http Error:",errh)
-    except requests.exceptions.ConnectionError as errc:
-      print ("Error Connecting:",errc) 
-    except requests.exceptions.Timeout as errt:
-      print ("Timeout Error:",errt)
-    except requests.exceptions.RequestException as err:
-      print ("OOps: Something Else",err)
+		
+		try:
+			r = requests.get(url, headers=headers)
+		except requests.exceptions.HTTPError as errh:
+			print ("Http Error:",errh)
+		except requests.exceptions.ConnectionError as errc:
+			print ("Error Connecting:",errc) 
+		except requests.exceptions.Timeout as errt:
+			print ("Timeout Error:",errt)
+		except requests.exceptions.RequestException as err:
+			print ("OOps: Something Else",err)
 
-    projects = r.json()
-    
-    dicionario = {
+    		projects = r.json()
+		
+		dicionario = {
         		"CodigoMateria": get_by_key('DetalheMateria.Materia.IdentificacaoMateria.CodigoMateria', projects),
         		"SiglaCasaIdentificacaoMateria": get_by_key('DetalheMateria.Materia.IdentificacaoMateria.SiglaCasaIdentificacaoMateria', projects),
         		"NomeCasaIdentificacaoMateria": get_by_key('DetalheMateria.Materia.IdentificacaoMateria.NomeCasaIdentificacaoMateria', projects),
@@ -305,252 +304,252 @@ def senado(ano_anterior, mes_anterior, dia_anterior):
         		"NomeCasaOrigem": get_by_key('DetalheMateria.Materia.OrigemMateria.NomeCasaOrigem', projects),        
         		"SiglaCasaIniciadora": get_by_key('DetalheMateria.Materia.CasaIniciadoraNoLegislativo.SiglaCasaIniciadora', projects),        
         		"NomeCasaIniciadora": get_by_key('DetalheMateria.Materia.CasaIniciadoraNoLegislativo.NomeCasaIniciadora', projects)
-                   	}
-     
-    try:
-      NomeAutor = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['NomeAutor'])
-    except KeyError:
-      NomeAutor = None                
-    except TypeError:
-      NomeAutor = None   
+			}
+		
+		try:
+			NomeAutor = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['NomeAutor'])
+		except KeyError:
+			NomeAutor = None                
+		except TypeError:
+			NomeAutor = None   
+		
+		try:
+			SiglaTipoAutor = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['SiglaTipoAutor'])
+		except KeyError:
+			SiglaTipoAutor = None                
+		except TypeError:
+			SiglaTipoAutor = None  
+			
+		try:
+			DescricaoTipoAutor = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['DescricaoTipoAutor'])
+		except KeyError:
+			DescricaoTipoAutor = None                
+		except TypeError:
+			DescricaoTipoAutor = None  
 
-    try:
-      SiglaTipoAutor = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['SiglaTipoAutor'])
-    except KeyError:
-      SiglaTipoAutor = None                
-    except TypeError:
-     SiglaTipoAutor = None  
-        
-    try:
-        DescricaoTipoAutor = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['DescricaoTipoAutor'])
-    except KeyError:
-        DescricaoTipoAutor = None                
-    except TypeError:
-        DescricaoTipoAutor = None  
-
-    try:
-        UfAutor = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['UfAutor'])
-    except KeyError:
-        UfAutor = None                
-    except TypeError:
-        UfAutor = None  
+    		try:
+			UfAutor = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['UfAutor'])
+		except KeyError:
+		        UfAutor = None                
+		except TypeError:
+			UfAutor = None  
 
 		try:
-      NumOrdemAutor = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['NumOrdemAutor'])
-    except KeyError:
-      NumOrdemAutor = None                
-    except TypeError:
-      NumOrdemAutor = None  
+			NumOrdemAutor = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['NumOrdemAutor'])
+		except KeyError:
+			NumOrdemAutor = None                
+		except TypeError:
+			NumOrdemAutor = None  
+			
+		try:
+			IndicadorOutrosAutores = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IndicadorOutrosAutores'])
+		except KeyError:
+			IndicadorOutrosAutores = None                
+		except TypeError:
+			IndicadorOutrosAutores = None  
 
-    try:
-      IndicadorOutrosAutores = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IndicadorOutrosAutores'])
-    except KeyError:
-      IndicadorOutrosAutores = None                
-    except TypeError:
-      IndicadorOutrosAutores = None  
+    		try:
+			CodigoParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['CodigoParlamentar'])
+		except KeyError:
+			CodigoParlamentar = None                
+		except TypeError:
+			CodigoParlamentar = None  
 
-    try:
-      CodigoParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['CodigoParlamentar'])
-    except KeyError:
-      CodigoParlamentar = None                
-    except TypeError:
-      CodigoParlamentar = None  
+    		try:
+			CodigoPublicoNaLegAtual = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['CodigoPublicoNaLegAtual'])
+		except KeyError:
+			CodigoPublicoNaLegAtual = None                
+		except TypeError:
+			CodigoPublicoNaLegAtual = None  
 
-    try:
-      CodigoPublicoNaLegAtual = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['CodigoPublicoNaLegAtual'])
-    except KeyError:
-      CodigoPublicoNaLegAtual = None                
-    except TypeError:
-      CodigoPublicoNaLegAtual = None  
+    		try:
+			NomeParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['NomeParlamentar'])
+		except KeyError:
+			NomeParlamentar = None                
+		except TypeError:
+			NomeParlamentar = None 
 
-    try:
-      NomeParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['NomeParlamentar'])
-    except KeyError:
-      NomeParlamentar = None                
-    except TypeError:
-      NomeParlamentar = None 
+    		try:
+			NomeCompletoParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['NomeCompletoParlamentar'])
+		except KeyError:
+			NomeCompletoParlamentar = None                
+		except TypeError:
+			NomeCompletoParlamentar = None 
+		
+		try:
+			SexoParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['SexoParlamentar'])
+		except KeyError:
+			SexoParlamentar = None                
+		except TypeError:
+			SexoParlamentar = None 
 
-    try:
-      NomeCompletoParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['NomeCompletoParlamentar'])
-    except KeyError:
-      NomeCompletoParlamentar = None                
-    except TypeError:
-     	NomeCompletoParlamentar = None 
+    		try:
+			FormaTratamento = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['FormaTratamento'])
+		except KeyError:
+			FormaTratamento = None                
+		except TypeError:
+		      FormaTratamento = None 
 
-    try:
-      SexoParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['SexoParlamentar'])
-    except KeyError:
-      SexoParlamentar = None                
-    except TypeError:
-      SexoParlamentar = None 
-
-    try:
-      FormaTratamento = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['FormaTratamento'])
-    except KeyError:
-      FormaTratamento = None                
-    except TypeError:
-      FormaTratamento = None 
-
-    try:
-    	UrlFotoParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['UrlFotoParlamentar'])
-    except KeyError:
-    	UrlFotoParlamentar = None                
-    except TypeError:
-     	UrlFotoParlamentar = None 
+    		try:
+			UrlFotoParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['UrlFotoParlamentar'])
+		except KeyError:
+			UrlFotoParlamentar = None                
+		except TypeError:
+			UrlFotoParlamentar = None 
 
 		try:
-      UrlPaginaParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['UrlPaginaParlamentar'])
-    except KeyError:
-    	UrlPaginaParlamentar = None                
-    except TypeError:
-    	UrlPaginaParlamentar = None 
+			UrlPaginaParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['UrlPaginaParlamentar'])
+		except KeyError:
+			UrlPaginaParlamentar = None                
+		except TypeError:
+			UrlPaginaParlamentar = None 
 
 		try:
-      EmailParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['EmailParlamentar'])
-    except KeyError:
-      EmailParlamentar = None                
-    except TypeError:
-      EmailParlamentar = None 
+			EmailParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['EmailParlamentar'])
+		except KeyError:
+			EmailParlamentar = None                
+		except TypeError:
+			EmailParlamentar = None 
 
-    try:
-      SiglaPartidoParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['SiglaPartidoParlamentar'])
-    except KeyError:
-      SiglaPartidoParlamentar = None                
-    except TypeError:
-      SiglaPartidoParlamentar = None 
+    		try:
+			SiglaPartidoParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['SiglaPartidoParlamentar'])
+		except KeyError:
+			SiglaPartidoParlamentar = None                
+		except TypeError:
+			SiglaPartidoParlamentar = None 
 
-    try:
-      UfParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['UfParlamentar'])
-    except KeyError:
-      UfParlamentar = None                
-    except TypeError:
-      UfParlamentar = None 
+    		try:
+			UfParlamentar = str(projects['DetalheMateria']['Materia']['Autoria']['Autor'][0]['IdentificacaoParlamentar']['UfParlamentar'])
+		except KeyError:
+			UfParlamentar = None                
+		except TypeError:
+			UfParlamentar = None 
 
-    try:	
-      NumeroAutuacao = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['NumeroAutuacao'])
-    except KeyError:
-      NumeroAutuacao = None                
-    except TypeError:
-      NumeroAutuacao = None 
+    		try:	
+			NumeroAutuacao = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['NumeroAutuacao'])
+		except KeyError:
+			NumeroAutuacao = None                
+		except TypeError:
+			NumeroAutuacao = None 
 
-    try:
-      DataSituacao = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Situacao']['DataSituacao'])
-    except KeyError:
-      DataSituacao = None                
-    except TypeError:
-      DataSituacao = None 
+		try:
+			DataSituacao = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Situacao']['DataSituacao'])
+		except KeyError:
+			DataSituacao = None                
+		except TypeError:
+			DataSituacao = None 
 
-    try:
-      CodigoSituacao = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Situacao']['CodigoSituacao'])
-    except KeyError:
-      CodigoSituacao = None                
-    except TypeError:
-      CodigoSituacao = None
+		try:
+			CodigoSituacao = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Situacao']['CodigoSituacao'])
+		except KeyError:
+			CodigoSituacao = None                
+		except TypeError:
+			CodigoSituacao = None
 
-    try:
-      SiglaSituacao = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Situacao']['SiglaSituacao'])
-    except KeyError:
-      SiglaSituacao = None                
-    except TypeError:
-      SiglaSituacao = None
+		try:
+			SiglaSituacao = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Situacao']['SiglaSituacao'])
+		except KeyError:
+			SiglaSituacao = None                
+		except TypeError:
+			SiglaSituacao = None
 
-    try:
-      DescricaoSituacao = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Situacao']['DescricaoSituacao'])
-    except KeyError:
-      DescricaoSituacao = None                
-    except TypeError:
-      DescricaoSituacao = None
+		try:
+			DescricaoSituacao = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Situacao']['DescricaoSituacao'])
+		except KeyError:
+			DescricaoSituacao = None                
+		except TypeError:
+			DescricaoSituacao = None
 
-    try:
-      DataLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['DataLocal'])
-    except KeyError:
-      DataLocal = None                
-    except TypeError:
-      DataLocal = None
+		try:
+			DataLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['DataLocal'])
+		except KeyError:
+			DataLocal = None                
+		except TypeError:
+			DataLocal = None
 
-    try:
-      CodigoLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['CodigoLocal'])
-    except KeyError:
-      CodigoLocal = None                
-    except TypeError:
-      CodigoLocal = None
+		try:
+			CodigoLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['CodigoLocal'])
+		except KeyError:
+			CodigoLocal = None                
+		except TypeError:
+			CodigoLocal = None
 
-    try:
-      TipoLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['TipoLocal'])
-    except KeyError:
-      TipoLocal = None                
-    except TypeError:
-      TipoLocal = None
-        
-    try:
-      SiglaCasaLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['SiglaCasaLocal'])
-    except KeyError:
-      SiglaCasaLocal = None                
-    except TypeError:
-      SiglaCasaLocal = None
+		try:
+		      TipoLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['TipoLocal'])
+		    except KeyError:
+		      TipoLocal = None                
+		    except TypeError:
+		      TipoLocal = None
 
-    try:
-      NomeCasaLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['NomeCasaLocal'])
-    except KeyError:
-      NomeCasaLocal = None                
-    except TypeError:
-      NomeCasaLocal = None
+		    try:
+		      SiglaCasaLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['SiglaCasaLocal'])
+		    except KeyError:
+		      SiglaCasaLocal = None                
+		    except TypeError:
+		      SiglaCasaLocal = None
 
-    try:
-      SiglaLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['SiglaLocal'])
-    except KeyError:
-      SiglaLocal = None                
-    except TypeError:
-      SiglaLocal = None
+		    try:
+		      NomeCasaLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['NomeCasaLocal'])
+		    except KeyError:
+		      NomeCasaLocal = None                
+		    except TypeError:
+		      NomeCasaLocal = None
 
-    try:
-      NomeLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['NomeLocal'])
-    except KeyError:
-      NomeLocal = None                
-    except TypeError:
-      NomeLocal = None
+		    try:
+		      SiglaLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['SiglaLocal'])
+		    except KeyError:
+		      SiglaLocal = None                
+		    except TypeError:
+		      SiglaLocal = None
 
-    try:
-      url_emendas = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][0]['UrlServico'])
-    except KeyError:
-      url_emendas = None                
-    except TypeError:
-      url_emendas = None
+		    try:
+		      NomeLocal = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Local']['NomeLocal'])
+		    except KeyError:
+		      NomeLocal = None                
+		    except TypeError:
+		      NomeLocal = None
 
-    try:
-      url_movimentacoes = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][1]['UrlServico'])
-    except KeyError:
-      url_movimentacoes = None                
-    except TypeError:
-      url_movimentacoes = None
+		    try:
+		      url_emendas = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][0]['UrlServico'])
+		    except KeyError:
+		      url_emendas = None                
+		    except TypeError:
+		      url_emendas = None
 
-    try:
-      url_relatorias = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][2]['UrlServico'])
-    except KeyError:
-      url_relatorias = None                
-    except TypeError:
-      url_relatorias = None
+		    try:
+		      url_movimentacoes = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][1]['UrlServico'])
+		    except KeyError:
+		      url_movimentacoes = None                
+		    except TypeError:
+		      url_movimentacoes = None
 
-    try:
-      url_texto = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][3]['UrlServico'])
-    except KeyError:
-      url_texto = None                
-    except TypeError:
-      url_texto = None
+		    try:
+		      url_relatorias = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][2]['UrlServico'])
+		    except KeyError:
+		      url_relatorias = None                
+		    except TypeError:
+		      url_relatorias = None
 
-    try:
-      url_votacoes_materia = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][4]['UrlServico'])
-    except KeyError:
-      url_votacoes_materia = None                
-    except TypeError:
-      url_votacoes_materia = None
+		    try:
+		      url_texto = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][3]['UrlServico'])
+		    except KeyError:
+		      url_texto = None                
+		    except TypeError:
+		      url_texto = None
 
-    try:
-      url_votacoes_comissoes = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][5]['UrlServico'])
-    except KeyError:
-      url_votacoes_comissoes = None                
-    except TypeError:
-      url_votacoes_comissoes = None
+		    try:
+		      url_votacoes_materia = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][4]['UrlServico'])
+		    except KeyError:
+		      url_votacoes_materia = None                
+		    except TypeError:
+		      url_votacoes_materia = None
+
+		    try:
+		      url_votacoes_comissoes = str(projects['DetalheMateria']['Materia']['OutrasInformacoes']['Servico'][5]['UrlServico'])
+		    except KeyError:
+		      url_votacoes_comissoes = None                
+		    except TypeError:
+		      url_votacoes_comissoes = None
 
     dicionario['NomeAutor'] = NomeAutor
     dicionario['SiglaTipoAutor'] = SiglaTipoAutor
