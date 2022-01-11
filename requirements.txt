@@ -4,3 +4,6 @@ requests
 xmltodict
 secure-smtplib
 pandas
+sendgrid
+gspread
+gspread-dataframe
