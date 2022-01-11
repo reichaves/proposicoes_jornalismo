@@ -1,16 +1,9 @@
-import dash
-import dash_bootstrap_components as dbc
-import dash_html_components as html
 import requests
 import pandas as pd
-import dash_core_components as dcc
-import plotly.express as px
-import numpy as np
-from dash.dependencies import Input,Output
-import dash_table
 import io
 import os
 import datetime
+from flask import Flask, render_template, request
 
 
 app = Flask(__name__)
