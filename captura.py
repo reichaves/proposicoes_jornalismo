@@ -14,12 +14,14 @@ from datetime import datetime, timedelta
 import os
 import json
 import xmltodict
-import smtplib
-from email.mime.image import MIMEImage
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Attachment, Mail 
+from sendgrid.helpers.mail import *
 
+import gspread
+import gspread_dataframe as gd
+import base64
 
 
 ### FUNÇÃO DA CÂMARA DOS DEPUTADOS
@@ -771,13 +773,9 @@ def mandamail(dados):
 	mes_hoje = now.strftime("%m")
 	ano_hoje = now.strftime("%Y")
 
-	recipients = ['reinaldo@abraji.org.br']
-	msg = MIMEMultipart()
-	msg['From'] = "Robot jornalista"  # sender name
-	msg['To'] = ", ".join(recipients) # for one recipient just enter a valid email address
-	msg['Subject'] = str(dia_hoje) + "/" + str(mes_hoje) + "/" + str(ano_hoje) + " Tramitacoes de interesse do jornalismo no Congresso"
-	
-  	# Isola apenas primeiras linhas
+	API_KEY = os.environ["SEND_GRID_API"]
+
+	# Isola apenas primeiras linhas
 	df = dados.bfill().iloc[[0]]
 	columns = list(df) 
 
@@ -789,23 +787,49 @@ def mandamail(dados):
 			lista.append(texto)
   	#print(lista)
 
-	body = "Olá seres humanos!\n\nEu sou um robô que vasculha as APIs da Câmara e do Senado em busca de proposições de interesse dos jornalistas.\n\nVeja as que tiveram alguma tramitação entre hoje e anteontem (todo dia eu vasculho esse intervalo):\n\n" + '\n'.join(lista)+ "\n\nNo momento eu procuro estas palavras-chave JORNALISMO, JORNALISTA, JORNALISTAS, COMUNICADORES, IMPRENSA, VERIFICADORES DE FATOS, CHECAGEM DE FATOS, FAKE NEWS, DESINFORMAÇÃO, TRANSPARÊNCIA NA INTERNET. Posso procurar quantas quiserem.\n\nPara mais detalhes consulte meu mestre: reinaldo@abraji.org.br"
+  	novo_email = Mail(
+    from_email='robojornalista@gmail.com',
+    to_emails=['reichaves@gmail.com', 'cruzagrafos@abraji.org.br'],
+    subject=str(dia_hoje) + "/" + str(mes_hoje) + "/" + str(ano_hoje) + " Tramitacoes de interesse do jornalismo no Congresso",
+    html_content="Olá seres humanos!<br><br>Eu sou um robô que vasculha as APIs da Câmara e do Senado em busca de proposições de interesse dos jornalistas.<br><br>Veja as que tiveram alguma tramitação entre hoje e anteontem (todo dia eu vasculho esse intervalo):<br><br>" + '<br>'.join(lista)+ "<br><br>No momento eu procuro estas palavras-chave JORNALISMO, JORNALISTA, JORNALISTAS, COMUNICADORES, IMPRENSA, VERIFICADORES DE FATOS, CHECAGEM DE FATOS, FAKE NEWS, DESINFORMAÇÃO, TRANSPARÊNCIA NA INTERNET. Posso procurar quantas quiserem.<br><br>Para mais detalhes consulte meu mestre: reinaldo@abraji.org.br")
 
-	msg.attach(MIMEText(body, 'plain'))
-	server = smtplib.SMTP('smtp.gmail.com', 587)  # put your relevant SMTP here
+	#body = "Olá seres humanos!<br><br>Eu sou um robô que vasculha as APIs da Câmara e do Senado em busca de proposições de interesse dos jornalistas.<br><br>Veja as que tiveram alguma tramitação entre hoje e anteontem (todo dia eu vasculho esse intervalo):<br><br>" + '<br>'.join(lista)+ "<br><br>No momento eu procuro estas palavras-chave JORNALISMO, JORNALISTA, JORNALISTAS, COMUNICADORES, IMPRENSA, VERIFICADORES DE FATOS, CHECAGEM DE FATOS, FAKE NEWS, DESINFORMAÇÃO, TRANSPARÊNCIA NA INTERNET. Posso procurar quantas quiserem.\n\nPara mais detalhes consulte meu mestre: reinaldo@abraji.org.br"
 
-
-	server.ehlo()
-	server.starttls()
-	server.ehlo()
-	server.login('robojornalista@gmail.com', '5ZAD9U8ftEfiT9X')   # use your real gmail account user name and password
-	server.send_message(msg)
-	server.quit()
+	try:
+		sg = SendGridAPIClient(API_KEY)
+		response = sg.send(novo_email)
+		#print(response.status_code)
+    	#print(response.body)
+    	#print(response.headers)
+	except Exception as e:
+		print(e)
 
 
 	return
 
 
+
+def preenche_planilha(dados, casa):
+	#dados.info()
+	now = datetime.now()
+	dados = dados.assign(data_consulta=str(now))
+	dados = dados.fillna('')
+
+	conteudo_codificado = os.environ["GOOGLE_SHEET_CREDENTIALS1"]
+	conteudo = base64.b64decode(conteudo_codificado)
+	credentials = json.loads(conteudo)
+
+	gc = gspread.service_account(credentials)
+
+	ws = gc.open(casa).worksheet("Página1")
+	#existing = gd.get_as_dataframe(ws)
+	existing = gd.get_as_dataframe(ws).dropna(axis = 1, how = 'all').dropna(axis = 0, how = 'any').reset_index(drop=True)
+	updated = existing.append(dados)
+	gd.set_with_dataframe(ws, updated)
+    
+    return
+
+	
 
 
 
@@ -841,6 +865,8 @@ def main():
 		tam_frases = len(df_lista_sentencas.index)
 		if tam_frases > 0:
    			mandamail(df_lista_sentencas)
+   			casa = 'proposicoes_jornalismo_camara'
+   			preenche_planilha(prop_cam, casa)
 
   	#print("/////////////////////////////////////")  	
 
@@ -862,6 +888,8 @@ def main():
 		tam_frases = len(df_lista_sentencas.index)
 		if tam_frases > 0:
    			mandamail(df_lista_sentencas)
+   			casa = 'proposicoes_jornalismo_senado'
+   			preenche_planilha(prop_sen, casa)
 
 
 
