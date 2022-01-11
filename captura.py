@@ -813,7 +813,7 @@ def preenche_planilha(dados, casa):
 	conteudo = base64.b64decode(conteudo_codificado)
 	credentials = json.loads(conteudo)
 
-	gc = gspread.service_account(credentials)
+	gc = gspread.service_account_from_dict(credentials)
 
 	ws = gc.open(casa).worksheet("Página1")
 	#existing = gd.get_as_dataframe(ws)
