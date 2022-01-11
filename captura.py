@@ -820,8 +820,8 @@ def preenche_planilha(dados, casa):
 	existing = gd.get_as_dataframe(ws).dropna(axis = 1, how = 'all').dropna(axis = 0, how = 'any').reset_index(drop=True)
 	updated = existing.append(dados)
 	gd.set_with_dataframe(ws, updated)
-    
-    return
+	
+	return
 
 	
 
