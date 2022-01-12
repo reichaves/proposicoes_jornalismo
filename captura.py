@@ -839,6 +839,11 @@ def preenche_planilha(dados, casa):
 		return tema
 
 	dados["tema_principal"] = procura.apply(limpeza1, axis=1)
+	
+	if "camara" in casa:
+		dados = dados[['id', 'uri', 'siglaTipo', 'numero', 'ano', 'ementa', 'dataApresentacao', 'statusProposicao_dataHora', 'statusProposicao_siglaOrgao', 'statusProposicao_descricaoTramitacao', 'statusProposicao_descricaoSituacao', 'statusProposicao_despacho', 'urlInteiroTeor', 'uriAutores', 'autor', 'ementa_minuscula', 'data_consulta', 'keywords', 'data_consulta', 'tema_principal']]
+	else:
+		dados = dados[['CodigoMateria', 'NomeCasaIdentificacaoMateria', 'DescricaoSubtipoMateria', 'NumeroMateria', 'AnoMateria', 'DescricaoObjetivoProcesso', 'DescricaoIdentificacaoMateria', 'IndicadorTramitando', 'EmentaMateria', 'ExplicacaoEmentaMateria', 'ApelidoMateria', 'IndicadorComplementar', 'DataApresentacao', 'DataLeitura', 'NomeCasaLeitura', 'NomeNatureza', 'DescricaoNatureza', 'Descricao_assunto', 'Descricao_assunto_geral', 'NomePoderOrigem', 'NomeCasaOrigem', 'NomeCasaIniciadora', 'NomeAutor', 'DescricaoTipoAutor', 'UfAutor', 	'NumOrdemAutor', 'IndicadorOutrosAutores', 'CodigoParlamentar', 'NomeParlamentar', 'NomeCompletoParlamentar', 'SiglaPartidoParlamentar', 'UfParlamentar', 'NumeroAutuacao', 'DataSituacao', 'DescricaoSituacao', 'DataLocal', 'TipoLocal', 'NomeCasaLocal', 'NomeLocal', 'url_emendas', 'url_movimentacoes', 'url_relatorias', 'url_texto', 'url_votacoes_materia', 'url_votacoes_comissoes', 'UrlTexto', 'ementa_minuscula', 'data_consulta', 'tema_principal']]
 
 	conteudo_codificado = os.environ["GOOGLE_SHEET_CREDENTIALS1"]
 	conteudo = base64.b64decode(conteudo_codificado)
