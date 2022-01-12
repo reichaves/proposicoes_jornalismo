@@ -808,6 +808,37 @@ def preenche_planilha(dados, casa):
 	now = datetime.now()
 	dados = dados.assign(data_consulta=str(now))
 	dados = dados.fillna('')
+	
+	# Cria coluna tema
+	def procura(linha):
+		proposicao_ementa = row['ementa_minuscula']
+		
+		if 'jornalismo' in proposicao_ementa:
+			tema = "jornalismo"			
+		elif 'jornalista' in proposicao_ementa or 'jornalistas' in proposicao_ementa:
+			tema = "jornalistas"
+		elif 'comunicadores' in proposicao_ementa:
+			tema = "comunicadores"
+		elif 'imprensa' in proposicao_ementa:
+			tema = "imprensa"
+		elif 'desinformação' in proposicao_ementa:
+			tema = "desinformação"
+		elif 'notícias falsas' in proposicao_ementa or 'fake news' in proposicao_ementa:
+			tema = "notícias falsas"
+		elif 'verificadores de fatos' in proposicao_ementa or 'checagem de fatos' in proposicao_ementa:
+			tema = "checagem de fatos"
+		elif 'transparência na internet' in proposicao_ementa:
+			tema = "transparência na internet"
+		elif 'radiodifusão' in proposicao_ementa:
+			tema = "radiodifusão"
+		elif 'liberdade de expressão' in proposicao_ementa:
+			tema = "liberdade de expressão"
+		elif 'informações de interesse coletivo' in proposicao_ementa:
+			tema = "informações de interesse coletivo"
+   
+		return tema
+
+	dados["tema_principal"] = procura.apply(limpeza1, axis=1)
 
 	conteudo_codificado = os.environ["GOOGLE_SHEET_CREDENTIALS1"]
 	conteudo = base64.b64decode(conteudo_codificado)
