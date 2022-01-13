@@ -4,6 +4,11 @@ import io
 import os
 import datetime
 from flask import Flask, render_template, request
+import os
+import base64
+import json
+import gspread 
+import datetime
 
 
 spreadsheet_id = os.environ["GOOGLE_SHEET_ID2"]
