@@ -50,7 +50,7 @@ def telegram():
 	elif "jornalismo" in text:
 		answer = "No momento eu monitoro na Abraji em jornalismo apenas o projeto que coleta proposições legislativas de interesse do jornalismo brasileiro, veja aqui: https://jornalismonocongresso.herokuapp.com - Em breve eu vou mnonitorar mais projetos e trazer informações aqui :)"
 	elif "robô" or "robot" in text:
-		answer = "Sim, pois é sou um robot :) Mas com uma limitação de respostas. Se você tem mais dúvidas sobre o trabalho da Abraji escreva para: abraji@abraji.org.br"
+		answer = "Sim, pois é, sou um robot :) Mas com uma limitação de respostas. Se você tem mais dúvidas sobre o trabalho da Abraji escreva para: abraji@abraji.org.br"
 	else:
 		answer = "Desculpe, não entendi. Sou um robô com uma limitação de respostas. Se você tem mais dúvidas sobre o trabalho da Abraji escreva para: abraji@abraji.org.br"
 	
