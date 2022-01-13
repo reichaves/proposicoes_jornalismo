@@ -6,15 +6,37 @@ import datetime
 from flask import Flask, render_template, request
 
 
+spreadsheet_id = os.environ["GOOGLE_SHEET_ID2"]
+conteudo_codificado = os.environ["GOOGLE_SHEET_CREDENTIALS1"]
+
+conteudo = base64.b64decode(conteudo_codificado)
+credentials = json.loads(conteudo)
+
+service_account = gspread.service_account_from_dict(credentials) # autenticação
+spreadsheet = service_account.open_by_key(spreadsheet_id) # "abrir" o arquivo
+worksheet = spreadsheet.worksheet("Página1") # aba
+
 app = Flask(__name__)
+
+
 
 @app.route("/telegram", methods=["POST"])
 
 def telegram():
 	# Processa mensagem
+	datahora = str(datetime.datetime.now())
 	update = request.json
 	chat_id = update["message"]["chat"]["id"]
 	text = update["message"]["text"].lower()
+	if "username" in update["message"]["from"]:
+		username = update["message"]["from"]["username"]
+	else:
+		username = ""
+	first_name = update["message"]["from"]["first_name"]
+	last_name = update["message"]["from"]["last_name"]
+	
+	#Guarda na planilha a mensagem recebida
+	worksheet.append_row([datahora, chat_id, "robot", username, first_name, last_name, text])
 	
 	if text in ['oi', 'olá', 'ola']:
 		answer = "Oi, como vai?!"
