@@ -924,9 +924,9 @@ def main():
    		# Manda e-mail
 		tam_frases = len(df_lista_sentencas.index)
 		if tam_frases > 0:
-   			mandamail(df_lista_sentencas)
-   			casa = 'proposicoes_jornalismo_camara'
-   			preenche_planilha(prop_cam, casa)
+			mandamail(df_lista_sentencas)
+			casa = 'proposicoes_jornalismo_camara'
+			preenche_planilha(prop_cam, casa)
 			telegram("da Câmara dos Deputados", prop_cam)
 
   	#print("/////////////////////////////////////")  	
