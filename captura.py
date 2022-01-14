@@ -948,11 +948,10 @@ def main():
    		# Manda e-mail
 		tam_frases = len(df_lista_sentencas.index)
 		if tam_frases > 0:
-   			mandamail(df_lista_sentencas)
-   			casa = 'proposicoes_jornalismo_senado'
-   			preenche_planilha(prop_sen, casa)
+			mandamail(df_lista_sentencas)
+			casa = 'proposicoes_jornalismo_senado'
+			preenche_planilha(prop_sen, casa)
 			telegram("do Senado", prop_sen)
-
 
 
 # executar bloco principal
