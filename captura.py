@@ -863,6 +863,7 @@ def preenche_planilha(dados, casa):
 	return
 
 
+# Envia avisos no Telegram
 def telegram(local, dados):
 	token = os.environ["TELEGRAM_TOKEN"]
 	update = request.json
@@ -877,6 +878,7 @@ def telegram(local, dados):
 	response = requests.post(url, data=message)
 
 	return
+
 
 ### DEFINIR BLOCO DE EXECUÇÃO PRINCIPAL
 def main():
@@ -912,7 +914,7 @@ def main():
    			mandamail(df_lista_sentencas)
    			casa = 'proposicoes_jornalismo_camara'
    			preenche_planilha(prop_cam, casa)
-			telegram ("da Câmara dos Deputados", prop_cam)
+			telegram("da Câmara dos Deputados", prop_cam)
 
   	#print("/////////////////////////////////////")  	
 
@@ -936,6 +938,7 @@ def main():
    			mandamail(df_lista_sentencas)
    			casa = 'proposicoes_jornalismo_senado'
    			preenche_planilha(prop_sen, casa)
+			telegram("do Senado", prop_sen)
 
 
 
