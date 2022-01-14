@@ -862,9 +862,21 @@ def preenche_planilha(dados, casa):
 	
 	return
 
+
+def telegram(local, dados):
+	token = os.environ["TELEGRAM_TOKEN"]
+	update = request.json
+	chat_id = update["message"]["chat"]["id"]
 	
+	answer = "Olá, nossa raspagem diária de proposições legislativas de interesse do jornalismo encontrou hoje " + len(dados) + " casos, vindos " + local + ". Veja mais detalhes e o link da planilha com os dados em https://jornalismonocongresso.herokuapp.com/"
+	
+	message = {"chat_id": chat_id, "text": answer}
+	
+	message = {"chat_id": chat_id, "text": answer}
+	url = f"https://api.telegram.org/bot{token}/sendMessage"
+	response = requests.post(url, data=message)
 
-
+	return
 
 ### DEFINIR BLOCO DE EXECUÇÃO PRINCIPAL
 def main():
@@ -900,6 +912,7 @@ def main():
    			mandamail(df_lista_sentencas)
    			casa = 'proposicoes_jornalismo_camara'
    			preenche_planilha(prop_cam, casa)
+			telegram ("da Câmara dos Deputados", prop_cam)
 
   	#print("/////////////////////////////////////")  	
 
