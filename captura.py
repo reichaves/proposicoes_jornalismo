@@ -884,9 +884,7 @@ def telegram(local, dados):
 	update = request.json
 	chat_id = update["message"]["chat"]["id"]
 	
-	answer = "Olá, nossa raspagem diária de proposições legislativas de interesse do jornalismo encontrou hoje " + len(dados) + " casos, vindos " + local + ". Veja mais detalhes e o link da planilha com os dados em https://jornalismonocongresso.herokuapp.com/"
-	
-	message = {"chat_id": chat_id, "text": answer}
+	answer = "Olá, nossa raspagem diária de proposições legislativas de interesse do jornalismo encontrou hoje " + len(dados) + " casos, vindos " + local + ". Veja mais detalhes e o link da planilha com os dados no site https://jornalismonocongresso.herokuapp.com/"
 	
 	message = {"chat_id": chat_id, "text": answer}
 	url = f"https://api.telegram.org/bot{token}/sendMessage"
