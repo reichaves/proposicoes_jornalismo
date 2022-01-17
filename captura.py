@@ -856,7 +856,7 @@ def preenche_planilha(dados, casa):
    
 		return tema
 
-	dados["tema_principal"] = procura.apply(limpeza1, axis=1)
+	dados["tema_principal"] = dados.apply(procura, axis=1)
 	
 	if "camara" in casa:
 		dados = dados[['id', 'uri', 'siglaTipo', 'numero', 'ano', 'ementa', 'dataApresentacao', 'statusProposicao_dataHora', 'statusProposicao_siglaOrgao', 'statusProposicao_descricaoTramitacao', 'statusProposicao_descricaoSituacao', 'statusProposicao_despacho', 'urlInteiroTeor', 'uriAutores', 'autor', 'ementa_minuscula', 'data_consulta', 'keywords', 'data_consulta', 'tema_principal']]
