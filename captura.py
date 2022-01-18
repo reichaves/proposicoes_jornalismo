@@ -829,7 +829,7 @@ def preenche_planilha(dados, casa):
 	
 	# Cria coluna tema
 	def procura(linha):
-		proposicao_ementa = row['ementa_minuscula']
+		proposicao_ementa = linha['ementa_minuscula']
 		
 		if 'jornalismo' in proposicao_ementa:
 			tema = "jornalismo"			
