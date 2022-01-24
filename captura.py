@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 import os
 import json
 import xmltodict
+from flask import Flask, request
 
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Attachment, Mail 
