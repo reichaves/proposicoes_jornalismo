@@ -882,8 +882,8 @@ def preenche_planilha(dados, casa):
 # Envia avisos no Telegram
 def telegram(local, dados):
 	token = os.environ["TELEGRAM_TOKEN"]
-	update = request.json
-	chat_id = update["message"]["chat"]["id"]
+	#update = request.json
+	chat_id = 445500799
 	
 	answer = "Olá, nossa raspagem diária de proposições legislativas de interesse do jornalismo encontrou hoje " + len(dados) + " casos, vindos " + local + ". Veja mais detalhes e o link da planilha com os dados no site https://jornalismonocongresso.herokuapp.com/"
 	
