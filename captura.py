@@ -859,12 +859,12 @@ def preenche_planilha(dados, casa):
 
 	dados["tema_principal"] = dados.apply(procura, axis=1)
 	
-	if casa == "proposicoes_jornalismo_camara":
-		dados = dados[['id', 'uri', 'siglaTipo', 'numero', 'ano', 'ementa', 'dataApresentacao', 'statusProposicao_dataHora', 'statusProposicao_siglaOrgao', 'statusProposicao_descricaoTramitacao', 'statusProposicao_descricaoSituacao', 'statusProposicao_despacho', 'urlInteiroTeor', 'uriAutores', 'autor', 'ementa_minuscula', 'data_consulta', 'tema_principal']]
-	else:
-		dados = dados[['CodigoMateria', 'NomeCasaIdentificacaoMateria', 'DescricaoSubtipoMateria', 'NumeroMateria', 'AnoMateria', 'DescricaoObjetivoProcesso', 'DescricaoIdentificacaoMateria', 'IndicadorTramitando', 'EmentaMateria', 'ExplicacaoEmentaMateria', 'ApelidoMateria', 'IndicadorComplementar', 'DataApresentacao', 'DataLeitura', 'NomeCasaLeitura', 'NomeNatureza', 'DescricaoNatureza', 'Descricao_assunto', 'Descricao_assunto_geral', 'NomePoderOrigem', 'NomeCasaOrigem', 'NomeCasaIniciadora', 'NomeAutor', 'DescricaoTipoAutor', 'UfAutor', 	'NumOrdemAutor', 'IndicadorOutrosAutores', 'CodigoParlamentar', 'NomeParlamentar', 'NomeCompletoParlamentar', 'SiglaPartidoParlamentar', 'UfParlamentar', 'NumeroAutuacao', 'DataSituacao', 'DescricaoSituacao', 'DataLocal', 'TipoLocal', 'NomeCasaLocal', 'NomeLocal', 'url_emendas', 'url_movimentacoes', 'url_relatorias', 'url_texto', 'url_votacoes_materia', 'url_votacoes_comissoes', 'UrlTexto', 'ementa_minuscula', 'data_consulta', 'tema_principal']]
+	#if casa == "proposicoes_jornalismo_camara":
+	#	dados = dados[['id', 'uri', 'siglaTipo', 'numero', 'ano', 'ementa', 'dataApresentacao', 'statusProposicao_dataHora', 'statusProposicao_siglaOrgao', 'statusProposicao_descricaoTramitacao', 'statusProposicao_descricaoSituacao', 'statusProposicao_despacho', 'urlInteiroTeor', 'uriAutores', 'autor', 'ementa_minuscula', 'data_consulta', 'tema_principal']]
+	#else:
+	#	dados = dados[['CodigoMateria', 'NomeCasaIdentificacaoMateria', 'DescricaoSubtipoMateria', 'NumeroMateria', 'AnoMateria', 'DescricaoObjetivoProcesso', 'DescricaoIdentificacaoMateria', 'IndicadorTramitando', 'EmentaMateria', 'ExplicacaoEmentaMateria', 'ApelidoMateria', 'IndicadorComplementar', 'DataApresentacao', 'DataLeitura', 'NomeCasaLeitura', 'NomeNatureza', 'DescricaoNatureza', 'Descricao_assunto', 'Descricao_assunto_geral', 'NomePoderOrigem', 'NomeCasaOrigem', 'NomeCasaIniciadora', 'NomeAutor', 'DescricaoTipoAutor', 'UfAutor', 	'NumOrdemAutor', 'IndicadorOutrosAutores', 'CodigoParlamentar', 'NomeParlamentar', 'NomeCompletoParlamentar', 'SiglaPartidoParlamentar', 'UfParlamentar', 'NumeroAutuacao', 'DataSituacao', 'DescricaoSituacao', 'DataLocal', 'TipoLocal', 'NomeCasaLocal', 'NomeLocal', 'url_emendas', 'url_movimentacoes', 'url_relatorias', 'url_texto', 'url_votacoes_materia', 'url_votacoes_comissoes', 'UrlTexto', 'ementa_minuscula', 'data_consulta', 'tema_principal']]
 
-	dados.info()
+	#ados.info()
 	
 	conteudo_codificado = os.environ["GOOGLE_SHEET_CREDENTIALS1"]
 	conteudo = base64.b64decode(conteudo_codificado)
@@ -875,8 +875,12 @@ def preenche_planilha(dados, casa):
 	ws = gc.open(casa).worksheet("Página1")
 	#existing = gd.get_as_dataframe(ws)
 	existing = gd.get_as_dataframe(ws).dropna(axis = 1, how = 'all').dropna(axis = 0, how = 'any').reset_index(drop=True)
-	
 	existing.info()
+	
+	a = existing.columns
+	a_tolist = a.tolist()
+	dados = dados[a_tolist]
+	dados.info()
 	
 	updated = existing.append(dados)
 	gd.set_with_dataframe(ws, updated)
