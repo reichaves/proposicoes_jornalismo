@@ -674,7 +674,7 @@ def senado(ano_anterior, mes_anterior, dia_anterior):
 ### FUNÇÃO PARA TERMOS DE INTERESSE
 def jornal(dados, origem):
 	# Define termos de interesse
-	search_list = ["JORNALISMO", "JORNALISTA", "JORNALISTAS", "COMUNICADORES", "IMPRENSA", "VERIFICADORES DE FATOS", "CHECAGEM DE FATOS", "FAKE NEWS", "DESINFORMAÇÃO", "TRANSPARÊNCIA NA INTERNET", "RADIODIFUSÃO", "LIBERDADE DE EXPRESSÃO", "INFORMAÇÕES DE INTERESSE COLETIVO"]
+	search_list = ["JORNALISMO", "JORNALISTA", "JORNALISTAS", "COMUNICADORES", "IMPRENSA", "VERIFICADORES DE FATOS", "CHECAGEM DE FATOS", "FAKE NEWS", "DESINFORMAÇÃO", "TRANSPARÊNCIA NA INTERNET", "LIBERDADE DE EXPRESSÃO", "INFORMAÇÕES DE INTERESSE COLETIVO"]
 
 	mask = dados['ementa_copia'].str.contains('|'.join(search_list))
 	seleciona = dados[mask]
@@ -806,7 +806,7 @@ def mandamail(dados):
 	novo_email = Mail(from_email='robojornalista@gmail.com', 
 			  to_emails = mandar, 
 			  subject=str(dia_hoje) + "/" + str(mes_hoje) + "/" + str(ano_hoje) + " Tramitacoes de interesse do jornalismo no Congresso", 
-			  html_content="Olá seres humanos!<br><br>Eu sou um robô que vasculha as APIs da Câmara e do Senado em busca de proposições de interesse dos jornalistas.<br><br>Veja as que tiveram alguma tramitação entre hoje e anteontem (todo dia eu vasculho esse intervalo):<br><br>" + '<br>'.join(lista)+ "<br><br>No momento eu procuro estas palavras-chave JORNALISMO, JORNALISTA, JORNALISTAS, COMUNICADORES, IMPRENSA, VERIFICADORES DE FATOS, CHECAGEM DE FATOS, FAKE NEWS, DESINFORMAÇÃO, TRANSPARÊNCIA NA INTERNET, RADIODIFUSÃO, LIBERDADE DE EXPRESSÃO E INFORMAÇÕES DE INTERESSE COLETIVO.<br><br>Veja também o <a href='https://jornalismonocongresso.herokuapp.com/'>monitor de proposições do projeto</a><br><br>E também receba notificações por Telegram de novas proposições e outros projetos da Abraji: digite '/start' no robô da Abraji <a href='https://telegram.me/abrajibot'>abrajibot</a><br><br>Para mais detalhes e dúvidas consulte meu mestre: <a href='mailto:reinaldo@abraji.org.br'>reinaldo@abraji.org.br</a>")
+			  html_content="Olá seres humanos!<br><br>Eu sou um robô que vasculha as APIs da Câmara e do Senado em busca de proposições de interesse dos jornalistas.<br><br>Veja as que tiveram alguma tramitação entre hoje e anteontem (todo dia eu vasculho esse intervalo):<br><br>" + '<br>'.join(lista)+ "<br><br>No momento eu procuro estas palavras-chave JORNALISMO, JORNALISTA, JORNALISTAS, COMUNICADORES, IMPRENSA, VERIFICADORES DE FATOS, CHECAGEM DE FATOS, FAKE NEWS, DESINFORMAÇÃO, TRANSPARÊNCIA NA INTERNET, LIBERDADE DE EXPRESSÃO E INFORMAÇÕES DE INTERESSE COLETIVO.<br><br>Veja também o <a href='https://jornalismonocongresso.herokuapp.com/'>monitor de proposições do projeto</a><br><br>E também receba notificações por Telegram de novas proposições e outros projetos da Abraji: digite '/start' no robô da Abraji <a href='https://telegram.me/abrajibot'>abrajibot</a><br><br>Para mais detalhes e dúvidas consulte meu mestre: <a href='mailto:reinaldo@abraji.org.br'>reinaldo@abraji.org.br</a>")
 	
 	try:
 		sg = SendGridAPIClient(API_KEY)
