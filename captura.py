@@ -18,7 +18,7 @@ from flask import Flask, request
 
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Attachment, Mail 
-from sendgrid.helpers.mail import *
+from sendgrid.helpers.mail import Mail, From, To, Subject, PlainTextContent, HtmlContent, SendGridException, Personalization, Bcc
 
 import gspread
 import gspread_dataframe as gd
@@ -804,9 +804,16 @@ def mandamail(dados):
 			#print(lista)
 	
 	novo_email = Mail(from_email='robojornalista@gmail.com', 
-			  to_emails = mandar, 
 			  subject=str(dia_hoje) + "/" + str(mes_hoje) + "/" + str(ano_hoje) + " Tramitacoes de interesse do jornalismo no Congresso", 
 			  html_content="Olá seres humanos!<br><br>Eu sou um robô que vasculha as APIs da Câmara e do Senado em busca de proposições de interesse dos jornalistas.<br><br>Veja as que tiveram alguma tramitação entre hoje e anteontem (todo dia eu vasculho esse intervalo):<br><br>" + '<br>'.join(lista)+ "<br><br>No momento eu procuro estas palavras-chave JORNALISMO, JORNALISTA, JORNALISTAS, COMUNICADORES, IMPRENSA, VERIFICADORES DE FATOS, CHECAGEM DE FATOS, FAKE NEWS, DESINFORMAÇÃO, TRANSPARÊNCIA NA INTERNET, LIBERDADE DE EXPRESSÃO E INFORMAÇÕES DE INTERESSE COLETIVO.<br><br><br><br>Veja também o <a href='https://jornalismonocongresso.herokuapp.com/'>monitor de proposições do projeto</a><br><br>E também receba notificações por Telegram de novas proposições e outros projetos da Abraji: digite '/start' no robô da Abraji <a href='https://telegram.me/abrajibot'>abrajibot</a><br><br>O código deste programa está <a href='https://github.com/reichaves/proposicoes_jornalismo'>aqui</a><br><br><br><br><br><br>Para mais detalhes e dúvidas consulte meu mestre: <a href='mailto:reinaldo@abraji.org.br'>reinaldo@abraji.org.br</a>")
+	
+	personalization = Personalization()
+	personalization.add_to(To('reinaldo@abraji.org.br'))
+	
+	for bcc_addr in mandar:
+		personalization.add_bcc(Bcc(bcc_addr))
+	
+	novo_email.add_personalization(personalization)
 	
 	try:
 		sg = SendGridAPIClient(API_KEY)
