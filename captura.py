@@ -866,10 +866,14 @@ def preenche_planilha(dados, casa):
 		return tema
 
 	def procura2(linha):
-		if casa == "proposicoes_jornalismo_camara":
+		lista = []
+		for index, value in linha.items():
+			lista.append(index)
+		
+		if "id" in lista:
 			id = linha['id']
 			pagina = "https://www.camara.leg.br/propostas-legislativas/" + str(id)
-		elif casa == "proposicoes_jornalismo_senado":
+		elif "CodigoMateria" in lista:
 			id = linha['CodigoMateria']
 			pagina = "https://www25.senado.leg.br/web/atividade/materias/-/materia/" + str(id)
 
