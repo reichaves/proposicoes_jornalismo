@@ -866,10 +866,10 @@ def preenche_planilha(dados, casa):
 		return tema
 
 	def procura2(linha):
-		if casa == "Cópia de proposicoes_jornalismo_camara":
+		if casa == "proposicoes_jornalismo_camara":
 			id = linha['id']
 			pagina = "https://www.camara.leg.br/propostas-legislativas/" + str(id)
-		elif casa == "Cópia de proposicoes_jornalismo_senado":
+		elif casa == "proposicoes_jornalismo_senado":
 			id = linha['CodigoMateria']
 			pagina = "https://www25.senado.leg.br/web/atividade/materias/-/materia/" + str(id)
 
@@ -878,7 +878,7 @@ def preenche_planilha(dados, casa):
 	dados["tema_principal"] = dados.apply(procura, axis=1)
 	dados["pagina_da_proposicao"] = dados.apply(procura2, axis=1)
 	
-	if casa == "Cópia de proposicoes_jornalismo_camara":
+	if casa == "proposicoes_jornalismo_camara":
 		dados = dados[['pagina_da_proposicao', 'id', 'uri', 'siglaTipo', 'numero', 'ano', 'ementa', 'dataApresentacao', 'statusProposicao_dataHora', 'statusProposicao_siglaOrgao', 'statusProposicao_descricaoTramitacao', 'statusProposicao_descricaoSituacao', 'statusProposicao_despacho', 'urlInteiroTeor', 'uriAutores', 'autor', 'ementa_minuscula', 'data_consulta', 'tema_principal']]
 	else:
 		dados = dados[["pagina_da_proposicao",  "CodigoMateria", "DescricaoSubtipoMateria", "NumeroMateria", "AnoMateria", "DescricaoIdentificacaoMateria", "IndicadorTramitando", "EmentaMateria", "IndicadorComplementar", "DataApresentacao", "NomeNatureza", "DescricaoNatureza", "Autor", "url_emendas",	"url_movimentacoes",  "url_relatorias", "url_texto", "url_votacoes_materia", "url_votacoes_comissoes", "UrlTexto", "ementa_minuscula", "data_consulta", "DescricaoObjetivoProcesso", "DataLeitura", "tema_principal"]]
