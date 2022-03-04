@@ -452,12 +452,12 @@ def senado(ano_anterior, mes_anterior, dia_anterior):
 		except TypeError:
 			CodigoSituacao = None
 
-		try:
-			SiglaSituacao = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Situacao']['SiglaSituacao'])
-		except KeyError:
-			SiglaSituacao = None                
-		except TypeError:
-			SiglaSituacao = None
+		#try:
+		#	SiglaSituacao = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Situacao']['SiglaSituacao'])
+		#except KeyError:
+		#	SiglaSituacao = None                
+		#except TypeError:
+		#	SiglaSituacao = None
 
 		try:
 			DescricaoSituacao = str(projects['DetalheMateria']['Materia']['SituacaoAtual']['Autuacoes']['Autuacao'][0]['Situacao']['DescricaoSituacao'])
@@ -577,7 +577,7 @@ def senado(ano_anterior, mes_anterior, dia_anterior):
 		dicionario['NumeroAutuacao'] = NumeroAutuacao
 		dicionario['DataSituacao'] = DataSituacao
 		dicionario['CodigoSituacao'] = CodigoSituacao
-		dicionario['SiglaSituacao'] = SiglaSituacao
+		#dicionario['SiglaSituacao'] = SiglaSituacao
 		dicionario['DescricaoSituacao'] = DescricaoSituacao
 		dicionario['DataLocal'] = DataLocal
 		dicionario['CodigoLocal'] = CodigoLocal
@@ -649,9 +649,64 @@ def senado(ano_anterior, mes_anterior, dia_anterior):
 	
 	df_prop_teor = pd.DataFrame(prop_teor)
 	#df_prop_teor.info()
+	
+	# Ultima tramitacao
+	prefixo = 'https://legis.senado.leg.br/dadosabertos/materia/movimentacoes/'
+	sufixo = '?v=7'
+
+	ultima_tramitacao = []
+
+	for num, row in df_tramitando.iterrows():
+		codigo = row['CodigoMateria']
+		
+		url = prefixo + codigo + sufixo
+		#print(url)
+		
+		try:
+			r = requests.get(url, headers=headers)
+		except requests.exceptions.HTTPError as errh:
+			print ("Http Error:",errh)
+		except requests.exceptions.ConnectionError as errc:
+			print ("Error Connecting:",errc) 
+		except requests.exceptions.Timeout as errt:
+			print ("Timeout Error:",errt)
+		except requests.exceptions.RequestException as err:
+			print ("OOps: Something Else",err)
+
+		projects = r.json()
+		
+		try:
+			SituacaoAtual = str(projects['MovimentacaoMateria']['Materia']['Autuacoes']['Autuacao'][0]['SituacoesAtuais']['SituacaoAtual'][0]['DescricaoSituacao'])
+		except KeyError:
+			SituacaoAtual = None                
+		except TypeError:
+			SituacaoAtual = None
+
+		try:
+			SiglaSituacao = str(projects['MovimentacaoMateria']['Materia']['Autuacoes']['Autuacao'][0]['SituacoesAtuais']['SituacaoAtual'][0]['SiglaSituacao'])
+		except KeyError:
+			SiglaSituacao = None                
+		except TypeError:
+			SiglaSituacao = None
+
+		dicionario = {
+        		"CodigoMateria": codigo,
+        		"SituacaoAtual": SituacaoAtual,
+        		"SiglaSituacao": SiglaSituacao
+        		}
+		
+		ultima_tramitacao.append(dicionario)
+	
+	df_ultima_tramitacao= pd.DataFrame(ultima_tramitacao)
+	#df_ultima_tramitacao.info()
+
+
 
 	# Une os dois dataframes
 	df_proposicoes = pd.merge(df_propdia_det, df_prop_teor, left_on='CodigoMateria', right_on='CodigoMateria')
+
+	df_proposicoes = pd.merge(df_proposicoes, df_ultima_tramitacao, left_on='CodigoMateria', right_on='CodigoMateria')
+
 	#df_proposicoes.info()
 	#df_proposicoes.to_csv('resultados/senado/proposicoes_senado_detalhes_do_dia.csv',index=False)
 
@@ -694,8 +749,8 @@ def frases(dados, origem):
 			proposicao_tipo = row['SiglaSubtipoMateria']
 			proposicao_numero = row['NumeroMateria']
 			proposicao_ano = row['AnoMateria']
-			tramitacao = row['NomeLocal']
-			status = row['DescricaoSituacao']
+			tramitacao = row['SituacaoAtual']
+			status = row['SiglaSituacao']
 			endereco = row['UrlTexto']
 			nome = row['Autor']
 			casa = 'SENADO'
@@ -885,7 +940,7 @@ def preenche_planilha(dados, casa):
 	if casa == "proposicoes_jornalismo_camara":
 		dados = dados[['pagina_da_proposicao', 'id', 'uri', 'siglaTipo', 'numero', 'ano', 'ementa', 'dataApresentacao', 'statusProposicao_dataHora', 'statusProposicao_siglaOrgao', 'statusProposicao_descricaoTramitacao', 'statusProposicao_descricaoSituacao', 'statusProposicao_despacho', 'urlInteiroTeor', 'uriAutores', 'autor', 'ementa_minuscula', 'data_consulta', 'tema_principal']]
 	else:
-		dados = dados[["pagina_da_proposicao",  "CodigoMateria", "DescricaoSubtipoMateria", "NumeroMateria", "AnoMateria", "DescricaoIdentificacaoMateria", "IndicadorTramitando", "EmentaMateria", "IndicadorComplementar", "DataApresentacao", "NomeNatureza", "DescricaoNatureza", "Autor", "url_emendas",	"url_movimentacoes",  "url_relatorias", "url_texto", "url_votacoes_materia", "url_votacoes_comissoes", "UrlTexto", "ementa_minuscula", "data_consulta", "DescricaoObjetivoProcesso", "DataLeitura", "tema_principal"]]
+		dados = dados[["pagina_da_proposicao",  "CodigoMateria", "DescricaoSubtipoMateria", "NumeroMateria", "AnoMateria", "DescricaoIdentificacaoMateria", "IndicadorTramitando", "EmentaMateria", "IndicadorComplementar", "DataApresentacao", "NomeNatureza", "DescricaoNatureza", "Autor", "SituacaoAtual", "SiglaSituacao", "url_emendas",	"url_movimentacoes",  "url_relatorias", "url_texto", "url_votacoes_materia", "url_votacoes_comissoes", "UrlTexto", "ementa_minuscula", "data_consulta", "DescricaoObjetivoProcesso", "DataLeitura", "tema_principal"]]
 
 	
 	conteudo_codificado = os.environ["GOOGLE_SHEET_CREDENTIALS1"]
