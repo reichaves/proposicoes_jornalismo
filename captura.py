@@ -879,7 +879,7 @@ def mandamail(dados, local):
 	message = Mail(
 		from_email=('robojornalista@gmail.com'),
 		to_emails=to_emails,
-		s_multiple=True)
+		is_multiple=True)
 	
 	message.add_personalization(personalization)
 	
