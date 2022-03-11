@@ -772,27 +772,27 @@ def frases(dados, origem):
 		sentencas = {}
 
 		if 'jornalismo' in proposicao_ementa:
-			sentencas['texto3/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre jornalismo e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco} <br>'
+			sentencas['texto3/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre jornalismo e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 		elif 'jornalista' in proposicao_ementa or 'jornalistas' in proposicao_ementa:
-			sentencas['texto4/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre jornalistas e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco} <br>'
+			sentencas['texto4/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre jornalistas e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 		elif 'comunicadores' in proposicao_ementa:
-			sentencas['texto5/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre ccomunicadores e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco} <br>'
+			sentencas['texto5/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre ccomunicadores e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 		elif 'imprensa' in proposicao_ementa:
-			sentencas['texto6/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre imprensa e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco} <br>'
+			sentencas['texto6/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre imprensa e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 		elif 'desinformação' in proposicao_ementa:
-			sentencas['texto11/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre desinformação e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco} <br>'
+			sentencas['texto11/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre desinformação e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 		elif 'notícias falsas' in proposicao_ementa or 'fake news' in proposicao_ementa:
-			sentencas['texto7/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre fake news ou notícias falsas e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco} <br>'
+			sentencas['texto7/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre fake news ou notícias falsas e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 		elif 'verificadores de fatos' in proposicao_ementa or 'checagem de fatos' in proposicao_ementa:
-			sentencas['texto8/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre verificadores de fatos ou checagem de fatos e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco} <br>'
+			sentencas['texto8/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre verificadores de fatos ou checagem de fatos e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 		elif 'transparência na internet' in proposicao_ementa:
-			sentencas['texto9/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre transparência na internet e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco} <br>'
+			sentencas['texto9/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre transparência na internet e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 		elif 'radiodifusão' in proposicao_ementa:
-			sentencas['texto10/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre radiodifusão e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco} <br>'
+			sentencas['texto10/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre radiodifusão e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 		elif 'liberdade de expressão' in proposicao_ementa:
-			sentencas['texto12/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre liberdade de expressão e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco} <br>'
+			sentencas['texto12/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre liberdade de expressão e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 		elif 'informações de interesse coletivo' in proposicao_ementa:
-			sentencas['texto13/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre informações de interesse coletivo e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco} <br>'
+			sentencas['texto13/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre informações de interesse coletivo e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 
     
     	#print(sentencas)
@@ -831,6 +831,7 @@ def mandamail(dados, local):
 
 
 	API_KEY = os.environ["SEND_GRID_API"]
+	templateid = os.environ["TEMPLATE_ID_SENDGRID"]
 	
 	# Pega endereços de e-mail para mandar
 	conteudo_codificado = os.environ["GOOGLE_SHEET_CREDENTIALS1"]
@@ -859,21 +860,36 @@ def mandamail(dados, local):
 			lista.append(texto)
 			#print(lista)
 	
-	novo_email = Mail(from_email='robojornalista@gmail.com', 
-			  subject=str(dia_hoje) + "/" + str(mes_hoje) + "/" + str(ano_hoje) + " Tramitacoes de interesse do jornalismo no Congresso" + str(local), 
-			  html_content="Olá seres humanos!<br><br>Eu sou um robô que vasculha as APIs da Câmara e do Senado em busca de proposições de interesse dos jornalistas.<br><br>Veja as que tiveram alguma tramitação entre hoje e anteontem (todo dia eu vasculho esse intervalo):<br><br>" + '<br>'.join(lista)+ "<br><br>No momento eu procuro estas palavras-chave JORNALISMO, JORNALISTA, JORNALISTAS, COMUNICADORES, IMPRENSA, VERIFICADORES DE FATOS, CHECAGEM DE FATOS, FAKE NEWS, DESINFORMAÇÃO, TRANSPARÊNCIA NA INTERNET, LIBERDADE DE EXPRESSÃO E INFORMAÇÕES DE INTERESSE COLETIVO.<br><br><br><br>Veja também o <a href='https://jornalismonocongresso.herokuapp.com/'>monitor de proposições do projeto</a><br><br>E também receba notificações por Telegram de novas proposições e outros projetos da Abraji: digite '/start' no robô da Abraji <a href='https://telegram.me/abrajibot'>abrajibot</a><br><br>O código deste programa está <a href='https://github.com/reichaves/proposicoes_jornalismo'>aqui</a><br><br><br><br><br><br>Para mais detalhes e dúvidas consulte meu mestre: <a href='mailto:reinaldo@abraji.org.br'>reinaldo@abraji.org.br</a>")
+	# Cria o assunto do dia do e-mail
+	assunto = str(dia_hoje) + "/" + str(mes_hoje) + "/" + str(ano_hoje) + " Tramitacoes de interesse do jornalismo no Congresso" + str(local)
+	
+	# Transforma as frases e o assunto no dicionário que está no template do Sendgrid - com chave sentences
+	lista = {"sentences": lista, "subject": assunto}
+	
+	# Adiciona e-mails principais e cria a mensagem
+	to_emails = [To(email= 'reinaldo@abraji.org.br')] 
 	
 	personalization = Personalization()
 	personalization.add_to(To('reinaldo@abraji.org.br'))
 	
+	# Adciona e-mails de assinantes como ocultos
 	for bcc_addr in mandar:
 		personalization.add_bcc(Bcc(bcc_addr))
 	
-	novo_email.add_personalization(personalization)
+	message = Mail(
+		from_email=('robojornalista@gmail.com'),
+		to_emails=to_emails,
+		s_multiple=True)
 	
+	message.add_personalization(personalization)
+	
+	message.dynamic_template_data = lista
+	
+	message.template_id = templateid
+		
 	try:
 		sg = SendGridAPIClient(API_KEY)
-		response = sg.send(novo_email)
+		response = sg.send(message)
 		#print(response.status_code)
     		#print(response.body)
     		#print(response.headers)
