@@ -729,7 +729,7 @@ def senado(ano_anterior, mes_anterior, dia_anterior):
 ### FUNÇÃO PARA TERMOS DE INTERESSE
 def jornal(dados, origem):
 	# Define termos de interesse
-	search_list = ["JORNALISMO", "JORNALISTA", "JORNALISTAS", "COMUNICADORES", "IMPRENSA", "VERIFICADORES DE FATOS", "CHECAGEM DE FATOS", "FAKE NEWS", "DESINFORMAÇÃO", "TRANSPARÊNCIA NA INTERNET", "LIBERDADE DE EXPRESSÃO", "INFORMAÇÕES DE INTERESSE COLETIVO"]
+	search_list = ["JORNALISMO", "JORNALISTA", "JORNALISTAS", "COMUNICADORES", "IMPRENSA", "VERIFICADORES DE FATOS", "CHECAGEM DE FATOS", "FAKE NEWS", "DESINFORMAÇÃO", "TRANSPARÊNCIA NA INTERNET", "TRANSPARÊNCIA DOS DADOS", "LIBERDADE DE EXPRESSÃO", "INFORMAÇÕES DE INTERESSE COLETIVO"]
 
 	mask = dados['ementa_copia'].str.contains('|'.join(search_list))
 	seleciona = dados[mask]
@@ -793,6 +793,8 @@ def frases(dados, origem):
 			sentencas['texto12/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre liberdade de expressão e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 		elif 'informações de interesse coletivo' in proposicao_ementa:
 			sentencas['texto13/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre informações de interesse coletivo e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
+		elif 'transparência dos dados' in proposicao_ementa:
+			sentencas['texto14/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre informações de transparência dos dados e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 
     
     	#print(sentencas)
@@ -933,6 +935,8 @@ def preenche_planilha(dados, casa):
 			tema = "liberdade de expressão"
 		elif 'informações de interesse coletivo' in proposicao_ementa:
 			tema = "informações de interesse coletivo"
+		elif 'transparência dos dados' in proposicao_ementa:
+			tema = "transparência dos dados"
    
 		return tema
 
