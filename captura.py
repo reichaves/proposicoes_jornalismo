@@ -939,6 +939,8 @@ def preenche_planilha(dados, casa):
 			tema = "informações de interesse coletivo"
 		elif 'transparência dos dados' in proposicao_ementa:
 			tema = "transparência dos dados"
+		elif 'organizações não-governamentais' or 'ongs' in proposicao_ementa:
+			tema = "ongs"
    
 		return tema
 
