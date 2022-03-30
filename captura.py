@@ -729,7 +729,7 @@ def senado(ano_anterior, mes_anterior, dia_anterior):
 ### FUNÇÃO PARA TERMOS DE INTERESSE
 def jornal(dados, origem):
 	# Define termos de interesse
-	search_list = ["JORNALISMO", "JORNALISTA", "JORNALISTAS", "COMUNICADORES", "IMPRENSA", "VERIFICADORES DE FATOS", "CHECAGEM DE FATOS", "FAKE NEWS", "DESINFORMAÇÃO", "TRANSPARÊNCIA NA INTERNET", "TRANSPARÊNCIA DOS DADOS", "LIBERDADE DE EXPRESSÃO", "INFORMAÇÕES DE INTERESSE COLETIVO"]
+	search_list = ["JORNALISMO", "JORNALISTA", "JORNALISTAS", "COMUNICADORES", "IMPRENSA", "VERIFICADORES DE FATOS", "CHECAGEM DE FATOS", "FAKE NEWS", "DESINFORMAÇÃO", "TRANSPARÊNCIA NA INTERNET", "TRANSPARÊNCIA DOS DADOS", "LIBERDADE DE EXPRESSÃO", "INFORMAÇÕES DE INTERESSE COLETIVO", "ORGANIZAÇÕES NÃO-GOVERNAMENTAIS", "ONGS"]
 
 	mask = dados['ementa_copia'].str.contains('|'.join(search_list))
 	seleciona = dados[mask]
@@ -795,6 +795,8 @@ def frases(dados, origem):
 			sentencas['texto13/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre informações de interesse coletivo e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 		elif 'transparência dos dados' in proposicao_ementa:
 			sentencas['texto14/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre informações de transparência dos dados e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
+		elif 'organizações não-governamentais' or 'ongs' in proposicao_ementa:
+			sentencas['texto15/' + str(conta)] = f'{casa}: {proposicao_tipo} {proposicao_numero}/{proposicao_ano}, de autoria de {nome}, fala sobre informações de Organizações Não-Governamentais e sofreu alterações em sua tramitação. Tramitação: {tramitacao}. Situação: {status}. Página: {pagina}. Teor: {endereco}'
 
     
     	#print(sentencas)
